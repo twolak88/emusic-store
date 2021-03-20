@@ -10,15 +10,10 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.80.0">
-<title>Carousel Template · Bootstrap v5.0</title>
-
-<link rel="canonical"
-	href="https://getbootstrap.com/docs/5.0/examples/carousel/">
-
-
+<title>eMusic Store</title>
 
 <!-- Bootstrap core CSS -->
-<link href="<c:url value="resources/css/bootstrap.min.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 
 <style>
 .bd-placeholder-img {
@@ -38,13 +33,13 @@
 
 
 <!-- Custom styles for this template -->
-<link href="<c:url value="resources/css/carousel.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/carousel.css" />" rel="stylesheet">
 </head>
 <body>
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">Carousel</a>
+				<a class="navbar-brand" href="<c:url value="/" />">eMusic Store</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
 					aria-controls="navbarCollapse" aria-expanded="false"
@@ -54,8 +49,8 @@
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+							aria-current="page" href="<c:url value="/" />">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value="/products/list" />">Products</a></li>
 						<li class="nav-item"><a class="nav-link disabled" href="#"
 							tabindex="-1" aria-disabled="true">Disabled</a></li>
 					</ul>
@@ -226,7 +221,7 @@
 	</main>
 
 
-	<script src="<c:url value="resources/js/bootstrap.min.js" />"></script>
+	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 
 
 </body>

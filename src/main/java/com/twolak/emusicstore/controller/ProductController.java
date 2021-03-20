@@ -23,7 +23,7 @@ public class ProductController {
 	@GetMapping("/list")
 	public String getProducts(Model model) {
 		List<Product> products = this.productDao.getProductList();
-		model.addAttribute("product", products.get(0));
+		model.addAttribute("products", products);
 		return "productList";
 	}
 }

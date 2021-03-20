@@ -23,8 +23,44 @@ public class ProductDao {
 				.manufacturer("Fender")
 				.build();
 		
+		Product product2 = Product.builder()
+				.name("Piano")
+				.category("Instrument")
+				.description("This is a piano")
+				.price(1200)
+				.condition("new")
+				.status("Active")
+				.unitInStock(5)
+				.manufacturer("DMS")
+				.build();
+		
+		Product product3 = Product.builder()
+				.name("Record")
+				.category("Record")
+				.description("This is a awesome mix")
+				.price(300)
+				.condition("new")
+				.status("Active")
+				.unitInStock(7)
+				.manufacturer("EMI")
+				.build();
+		
+		Product product4 = Product.builder()
+				.name("Speaker")
+				.category("Accessory")
+				.description("This is a awesome speaker")
+				.price(299)
+				.condition("new")
+				.status("Active")
+				.unitInStock(7)
+				.manufacturer("Polk")
+				.build();
+		
 		productList = new ArrayList<>();
 		productList.add(product1);
+		productList.add(product2);
+		productList.add(product3);
+		productList.add(product4);
 		return productList;
 	}
 
