@@ -1,4 +1,4 @@
-package com.twolak.emusicstore;
+package com.twolak.emusicstore.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
