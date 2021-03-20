@@ -2,17 +2,16 @@ package com.twolak.emusicstore.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import com.twolak.emusicstore.model.Product;
 
 @Component
 public class ProductDao {
-	private List<Product> productList;
 	
 	public List<Product> getProductList() {
 		Product product1 = Product.builder()
+				.id("1")
 				.name("Guitar1")
 				.category("Instrument")
 				.description("This is a guitar")
@@ -24,6 +23,7 @@ public class ProductDao {
 				.build();
 		
 		Product product2 = Product.builder()
+				.id("2")
 				.name("Piano")
 				.category("Instrument")
 				.description("This is a piano")
@@ -35,6 +35,7 @@ public class ProductDao {
 				.build();
 		
 		Product product3 = Product.builder()
+				.id("3")
 				.name("Record")
 				.category("Record")
 				.description("This is a awesome mix")
@@ -46,6 +47,7 @@ public class ProductDao {
 				.build();
 		
 		Product product4 = Product.builder()
+				.id("4")
 				.name("Speaker")
 				.category("Accessory")
 				.description("This is a awesome speaker")
@@ -56,12 +58,20 @@ public class ProductDao {
 				.manufacturer("Polk")
 				.build();
 		
-		productList = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
 		productList.add(product1);
 		productList.add(product2);
 		productList.add(product3);
 		productList.add(product4);
 		return productList;
+	}
+
+	public Product getProductById(String id) {
+		return this.getProductList()
+				.stream()
+				.filter(product -> product.getId().equals(id))
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException(String.format("No product found for id: %s !", id)));
 	}
 
 }

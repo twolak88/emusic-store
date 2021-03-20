@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.twolak.emusicstore.dao.ProductDao;
@@ -20,10 +21,17 @@ public class ProductController {
 		this.productDao = productDao;
 	}
 
-	@GetMapping("/list")
+	@GetMapping
 	public String getProducts(Model model) {
 		List<Product> products = this.productDao.getProductList();
 		model.addAttribute("products", products);
 		return "productList";
+	}
+	
+	@GetMapping("/{id}")
+	public String getProduct(@PathVariable("id") String id, Model model) {
+		Product product = this.productDao.getProductById(id);
+		model.addAttribute("product", product);
+		return "viewProduct";
 	}
 }

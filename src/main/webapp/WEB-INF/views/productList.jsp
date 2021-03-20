@@ -1,122 +1,46 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author"
-	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="generator" content="Hugo 0.80.0">
-<title>eMusic Store</title>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@include file="/WEB-INF/views/template/header.jsp"%>
+<div class="container-wrapper" style="padding-top: 5rem;">
+	<div class="container">
+		<div class="page-header">
+			<h1>All Products</h1>
 
-<!-- Bootstrap core CSS -->
-<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-
-<style>
-body {
-  padding-top: 4rem;
-  padding-bottom: 3rem;
-  color: #5a5a5a;
-}
-
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-</style>
-
-</head>
-<body>
-	<header>
-		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="<c:url value="/" />">eMusic Store</a>
-				<button class="navbar-toggler" type="button"
-					data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-					aria-controls="navbarCollapse" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarCollapse">
-					<ul class="navbar-nav me-auto mb-2 mb-md-0">
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="<c:url value="/" />">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="<c:url value="/products/list" />">Products</a></li>
-						<li class="nav-item"><a class="nav-link disabled" href="#"
-							tabindex="-1" aria-disabled="true">Disabled</a></li>
-					</ul>
-					<form class="d-flex">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
-				</div>
-			</div>
-		</nav>
-	</header>
-
-	<main>
-		<div class="container-wrapper">
-			<div class="container">
-				<div class="page-header">
-					<h1>All Products</h1>
-					
-					<p class="lead">Checkout all the awesome products available now!</p>
-				</div>
-				
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr class="table-dark">
-							<th>Photo thumb</th>
-							<th>Product Name</th>
-							<th>Category</th>
-							<th>Condition</th>
-							<th>Price</th>			
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${ products }" var="product">
-						<tr>
-							<td><img src="#" alt="image" /></td>
-							<td>${ product.name }</td>
-							<td>${ product.category }</td>
-							<td>${ product.condition }</td>
-							<td>${ product.price }</td>			
-						</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-
-				<!-- FOOTER -->
-				<footer class="container">
-					<p class="float-end">
-						<a href="#">Back to top</a>
-					</p>
-					<p>
-						&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a>
-						&middot; <a href="#">Terms</a>
-					</p>
-				</footer>
-			
-			</div>
+			<p class="lead">Checkout all the awesome products available now!</p>
 		</div>
-	</main>
 
-
-	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-
-
-</body>
-</html>
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr class="table-dark">
+					<th>Photo thumb</th>
+					<th>Product Name</th>
+					<th>Category</th>
+					<th>Condition</th>
+					<th>Price</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${ products }" var="product">
+					<tr>
+						<td><img src="#" alt="image" /></td>
+						<td>${ product.name }</td>
+						<td>${ product.category }</td>
+						<td>${ product.condition }</td>
+						<td>${ product.price }</td>
+						<td>
+							<a href="<spring:url value="/products/${ product.id }" />">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+	  								<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+								</svg>
+							</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>
+<%@include file="/WEB-INF/views/template/footer.jsp"%>

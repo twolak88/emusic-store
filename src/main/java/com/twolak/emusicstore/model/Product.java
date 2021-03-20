@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class Product {
+	private String id;
 	private String  name;
 	private String category;
 	private String description;
