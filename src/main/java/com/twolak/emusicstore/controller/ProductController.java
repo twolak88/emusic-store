@@ -23,13 +23,13 @@ public class ProductController {
 	public String getProducts(Model model) {
 		Iterable<Product> products = this.productService.getAllProducts();
 		model.addAttribute("products", products);
-		return "productList";
+		return "product/productList";
 	}
 	
 	@GetMapping("/{id}")
 	public String getProduct(@PathVariable("id") Long id, Model model) {
 		Product product = this.productService.getProductById(id);
 		model.addAttribute("product", product);
-		return "viewProduct";
+		return "product/viewProduct";
 	}
 }
