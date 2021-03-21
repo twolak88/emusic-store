@@ -10,7 +10,10 @@
 
 			<p class="lead">Fill below information to add new Product</p>
 		</div>
-		<form:form method="post" action="${pageContext.request.contextPath}/admin/productInventory/addProduct" modelAttribute="product">
+		<form:form method="post" 
+				action="${pageContext.request.contextPath}/admin/productInventory/addProduct" 
+				modelAttribute="product"
+				enctype="multipart/form-data">
 			<div class="form-group mb-3">
 				<label for="name" class="form-label fw-bold">Name</label>
 				<form:input path="name" id="name" class="form-control" />
@@ -75,7 +78,13 @@
 				<label for="manufacturer" class="form-label fw-bold">Manufacturer</label>
 				<form:input path="manufacturer" id="manufacturer" class="form-control" />
 			</div>
-			<input type="submit" value="submit" class="btn btn-success" />
+			
+			<div class="form-group mb-5">
+				<label for="image" class="control-label fw-bold">Upload Image</label>
+				<form:input path="image" id="image" type="file" class="form-control" />
+			</div>
+			
+			<input type="submit" value="Submit" class="btn btn-success" />
 			<a href="<spring:url value="/admin/productInventory" />" class="btn btn-danger">Cancel</a>
 		</form:form>
 	</div>

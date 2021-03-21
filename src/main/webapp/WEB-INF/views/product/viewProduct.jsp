@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-5">
-					<img src="#" alt="image" style="width: 100%; height: 300px;" />
+					<img src="<c:url value="${ product.imageUrl }" />" alt="image" style="max-width: 100%; max-height: 300px;" />
 				</div>
 				<div class="col-md-5">
 					 <h3><strong>${ product.name }</strong></h3>
@@ -25,6 +25,12 @@
 					 </p>
 					 <p>
 					 	<strong>Condition: </strong>${ product.condition }
+					 </p>
+					 <p>
+					 	<strong>In Stock: </strong>${ product.unitInStock }
+					 </p>
+					 <p>
+					 	<strong>Status: </strong>${ product.status }
 					 </p>
 					 <h4>${ product.price } PLN</h4>
 				</div>

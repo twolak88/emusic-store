@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,4 +54,9 @@ public class Product {
 	@Column(name = "manufacturer")
 	private String manufacturer;
 	
+	@Column(name = "product_image_url")
+	private String imageUrl;
+	
+	@Transient
+	private MultipartFile image;
 }

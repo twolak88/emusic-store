@@ -1,5 +1,7 @@
 package com.twolak.emusicstore.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,15 +42,18 @@ public class AdminController {
 	}
 	
 	@PostMapping("/productInventory/addProduct")
-	public String saveProduct(@ModelAttribute("product") Product product) {
+	public String saveProduct(@ModelAttribute("product") Product product, HttpServletRequest request) {
 		
-		this.productService.addProduct(product);
+		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		this.productService.addProduct(product, rootDirectory);
+		
 		return "redirect:/admin/productInventory";
 	}
 	
 	@GetMapping("/productInventory/delete/{id}")
-	public String deleteProduct(@PathVariable("id") Long id) {
-		this.productService.deleteProduct(id);
+	public String deleteProduct(@PathVariable("id") Long id, HttpServletRequest request) {
+		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		this.productService.deleteProduct(id, rootDirectory);
 		return "redirect:/admin/productInventory";
 	}
 }

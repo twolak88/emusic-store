@@ -3,24 +3,32 @@ package com.twolak.emusicstore.services.impl;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.twolak.emusicstore.model.Product;
 import com.twolak.emusicstore.repositories.ProductRepository;
+import com.twolak.emusicstore.services.ImageService;
 import com.twolak.emusicstore.services.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
 	private final ProductRepository productRepository;
+	private final ImageService imageService;
 	
-	public ProductServiceImpl(ProductRepository productRepository) {
+	public ProductServiceImpl(ProductRepository productRepository, ImageService imageService) {
 		this.productRepository = productRepository;
+		this.imageService = imageService;
 	}
 	
 	@Transactional
 	@Override
-	public Product addProduct(Product product) {
-		return this.productRepository.save(product);
+	public Product addProduct(Product product, String rootPath) {
+		MultipartFile productImage = product.getImage();
+		String imageUrl = imageService.saveProductImage(productImage, rootPath);
+		product.setImageUrl(imageUrl);
+		Product savedProduct = this.productRepository.save(product);
+		return savedProduct;
 	}
 
 	@Override
@@ -36,7 +44,10 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Transactional
 	@Override
-	public void deleteProduct(Long id) {
+	public void deleteProduct(Long id, String rootPath) {
+		Product product = this.getProductById(id);
+		this.imageService.deleteProductImage(rootPath, product.getImageUrl());
+		
 		this.productRepository.deleteById(id);
 	}
 
