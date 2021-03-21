@@ -40,4 +40,13 @@ public class ProductServiceImpl implements ProductService {
 		this.productRepository.deleteById(id);
 	}
 
+	@Override
+	public Product getNewProduct() {
+		return Product.builder()
+				.category("instrument")
+				.condition("new")
+				.status("active")
+				.build();
+	}
+
 }

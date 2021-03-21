@@ -54,6 +54,7 @@ body {
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="<c:url value="/" />">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/products" />">Products</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value="/admin" />">Admin</a></li>
 						<li class="nav-item"><a class="nav-link disabled" href="#"
 							tabindex="-1" aria-disabled="true">Disabled</a></li>
 					</ul>

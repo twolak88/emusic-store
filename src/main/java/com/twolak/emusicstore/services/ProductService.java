@@ -11,4 +11,6 @@ public interface ProductService {
 	Iterable<Product> getAllProducts();
 	
 	void deleteProduct(Long id);
+	
+	Product getNewProduct();
 }
