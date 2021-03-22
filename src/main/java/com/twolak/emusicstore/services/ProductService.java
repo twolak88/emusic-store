@@ -6,6 +6,8 @@ public interface ProductService {
 	
 	Product addProduct(Product product, String rootPath);
 	
+	Product updateProduct(Product product, String rootPath);
+	
 	Product getProductById(Long id);
 	
 	Iterable<Product> getAllProducts();

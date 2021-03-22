@@ -16,19 +16,34 @@ import com.twolak.emusicstore.services.ImageService;
 public class ImageServiceImpl implements ImageService {
 
 	@Override
-	public String saveProductImage(MultipartFile productImage, String rootPath) {
-		
-		String extension = FilenameUtils.getExtension(productImage.getOriginalFilename());
-		String pathToReturn = null;
+	public String saveProductImage(MultipartFile productImage, String rootPath, String imagePath) {
+		String pathToReturn = imagePath;
 		Path path = null;
-		
-		do {
-			pathToReturn = "//resources//images//" + UUID.randomUUID().toString() + "." + extension;
-			path = Paths.get(rootPath + "//WEB-INF" + pathToReturn);
-		} while(Files.exists(path));
+		Path oldPath = null;
 		
 		if (productImage != null && !productImage.isEmpty()) {
+			if (imagePath.isBlank()) {
+				do {
+					String extension = FilenameUtils.getExtension(productImage.getOriginalFilename());
+					pathToReturn = "//resources//images//" + UUID.randomUUID().toString() + "." + extension;
+					path = Paths.get(rootPath + "//WEB-INF" + pathToReturn);
+				} while(Files.exists(path));
+			} else {
+				String extension = FilenameUtils.getExtension(productImage.getOriginalFilename());
+				
+				oldPath = Paths.get(rootPath + "//WEB-INF" + pathToReturn);
+				
+				if (!FilenameUtils.isExtension(imagePath, extension)) {
+					imagePath = FilenameUtils.removeExtension(imagePath);
+					imagePath = imagePath + "." + extension;
+				}
+				pathToReturn = imagePath;
+				path = Paths.get(rootPath + "//WEB-INF" + pathToReturn);
+			}
 			try {
+				if (oldPath != null) {
+					Files.deleteIfExists(oldPath);
+				}
 				productImage.transferTo(path);
 				return pathToReturn;
 			} catch (IllegalStateException | IOException e) {
@@ -36,7 +51,7 @@ public class ImageServiceImpl implements ImageService {
 				throw new RuntimeException("Product image saving failed", e);
 			}
 		}
-		return null;
+		return pathToReturn;
 	}
 
 	@Override

@@ -56,4 +56,20 @@ public class AdminController {
 		this.productService.deleteProduct(id, rootDirectory);
 		return "redirect:/admin/productInventory";
 	}
+	
+	@GetMapping("/productInventory/edit/{id}")
+	public String editProduct(@PathVariable("id") Long id, Model model) {
+		Product product = this.productService.getProductById(id);
+		model.addAttribute("product", product);
+		return "admin/editProduct";
+	}
+	
+	@PostMapping("/productInventory/edit")
+	public String updateProduct(@ModelAttribute("product") Product product, Model model, HttpServletRequest request) {
+		
+		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		this.productService.updateProduct(product, rootDirectory);
+		
+		return "redirect:/admin/productInventory";
+	}
 }

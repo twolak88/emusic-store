@@ -25,7 +25,20 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product addProduct(Product product, String rootPath) {
 		MultipartFile productImage = product.getImage();
-		String imageUrl = imageService.saveProductImage(productImage, rootPath);
+		String imageUrl = imageService.saveProductImage(productImage, rootPath, null);
+		product.setImageUrl(imageUrl);
+		Product savedProduct = this.productRepository.save(product);
+		return savedProduct;
+	}
+	
+	@Transactional
+	@Override
+	public Product updateProduct(Product product, String rootPath) {
+		MultipartFile productImage = product.getImage();
+		String imageUrl = product.getImageUrl();
+		if (productImage != null && !productImage.isEmpty()) {
+			imageUrl = imageService.saveProductImage(productImage, rootPath, imageUrl);
+		}
 		product.setImageUrl(imageUrl);
 		Product savedProduct = this.productRepository.save(product);
 		return savedProduct;
