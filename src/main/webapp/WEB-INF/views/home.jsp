@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="/WEB-INF/views/template/header.jsp"%>
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 	<div class="carousel-indicators">
@@ -14,53 +15,29 @@
 	</div>
 	<div class="carousel-inner">
 		<div class="carousel-item active">
-			<svg class="bd-placeholder-img" width="100%" height="100%"
-				xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-				preserveAspectRatio="xMidYMid slice" focusable="false">
-						<rect width="100%" height="100%" fill="#777" /></svg>
-
+			<img class="bd-placeholder-img home-image" src="<c:url value="/resources/images/back01.jpg" />" alt="First Slide" />
 			<div class="container">
 				<div class="carousel-caption text-start">
-					<h1>Example headline.</h1>
-					<p>Some representative placeholder content for the first slide
-						of the carousel.</p>
-					<p>
-						<a class="btn btn-lg btn-primary" href="#">Sign up today</a>
-					</p>
+					<h1>Welcome to my eMusic Store.</h1>
+					<p>Here you find many awesome instruments.</p>
 				</div>
 			</div>
 		</div>
 		<div class="carousel-item">
-			<svg class="bd-placeholder-img" width="100%" height="100%"
-				xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-				preserveAspectRatio="xMidYMid slice" focusable="false">
-						<rect width="100%" height="100%" fill="#777" /></svg>
-
+			<img class="bd-placeholder-img home-image" src="<c:url value="/resources/images/back02.jpg" />" alt="Second Slide" />
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>Another example headline.</h1>
-					<p>Some representative placeholder content for the second slide
-						of the carousel.</p>
-					<p>
-						<a class="btn btn-lg btn-primary" href="#">Learn more</a>
-					</p>
+					<h1>Best prices</h1>
+					<p>Awesome cheap instruments and accessories.</p>
 				</div>
 			</div>
 		</div>
 		<div class="carousel-item">
-			<svg class="bd-placeholder-img" width="100%" height="100%"
-				xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-				preserveAspectRatio="xMidYMid slice" focusable="false">
-						<rect width="100%" height="100%" fill="#777" /></svg>
-
+			<img class="bd-placeholder-img home-image" src="<c:url value="/resources/images/back03.jpg" />" alt="Third Slide" />
 			<div class="container">
 				<div class="carousel-caption text-end">
-					<h1>One more for good measure.</h1>
-					<p>Some representative placeholder content for the third slide
-						of this carousel.</p>
-					<p>
-						<a class="btn btn-lg btn-primary" href="#">Browse gallery</a>
-					</p>
+					<h1>Outlet</h1>
+					<p>Used instruments in good prices.</p>
 				</div>
 			</div>
 		</div>
