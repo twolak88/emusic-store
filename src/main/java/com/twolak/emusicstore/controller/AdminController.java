@@ -1,9 +1,11 @@
 package com.twolak.emusicstore.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +44,11 @@ public class AdminController {
 	}
 	
 	@PostMapping("/productInventory/addProduct")
-	public String saveProduct(@ModelAttribute("product") Product product, HttpServletRequest request) {
+	public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, HttpServletRequest request) {
+		
+		if (bindingResult.hasErrors()) {
+			return "admin/addProduct";
+		}
 		
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 		this.productService.addProduct(product, rootDirectory);
@@ -65,7 +71,11 @@ public class AdminController {
 	}
 	
 	@PostMapping("/productInventory/edit")
-	public String updateProduct(@ModelAttribute("product") Product product, Model model, HttpServletRequest request) {
+	public String updateProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model model, HttpServletRequest request) {
+		
+		if (bindingResult.hasErrors()) {
+			return "admin/editProduct";
+		}
 		
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 		this.productService.updateProduct(product, rootDirectory);

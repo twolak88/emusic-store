@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +32,7 @@ public class Product {
 	@Column(name = "id")
 	private Long id;
 	
+	@NotBlank(message = "The product name must not be blank")
 	@Column(name = "name")
 	private String  name;
 	
@@ -39,6 +42,7 @@ public class Product {
 	@Column(name = "description")
 	private String description;
 	
+	@Min(value = 0, message = "The product price must not be less than zero")
 	@Column(name = "price")
 	private double price;
 	
@@ -48,6 +52,7 @@ public class Product {
 	@Column(name = "status")
 	private String status;
 	
+	@Min(value = 0, message = "The product unit in stock must not be less than zero")
 	@Column(name = "unit_in_stock")
 	private int unitInStock;
 	

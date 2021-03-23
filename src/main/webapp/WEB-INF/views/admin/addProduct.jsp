@@ -16,6 +16,7 @@
 				enctype="multipart/form-data">
 			<div class="form-group mb-3">
 				<label for="name" class="form-label fw-bold">Name</label>
+				<form:errors path="name" cssStyle="color: red" />
 				<form:input path="name" id="name" class="form-control" />
 			</div>
 			
@@ -42,6 +43,7 @@
 			
 			<div class="form-group mb-3">
 				<label for="price" class="form-label fw-bold">Price</label>
+				<form:errors path="price" cssStyle="color: red" />
 				<form:input path="price" id="price" type="number" class="form-control" />
 			</div>
 			
@@ -71,6 +73,7 @@
 			
 			<div class="form-group mb-3">
 				<label for="unitInStock" class="form-label fw-bold">Unit In Stock</label>
+				<form:errors path="unitInStock" cssStyle="color: red" />
 				<form:input path="unitInStock" id="unitInStock" type="number" class="form-control" />
 			</div>
 			
