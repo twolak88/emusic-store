@@ -11,11 +11,10 @@
 			<p class="lead">Fill below information to update Product: ${product.name}</p>
 		</div>
 		<form:form method="post" 
-				action="${pageContext.request.contextPath}/admin/productInventory/edit" 
+				action="${pageContext.request.contextPath}/admin/productInventory/edit?${_csrf.parameterName}=${_csrf.token}" 
 				modelAttribute="product"
 				enctype="multipart/form-data">
 			
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<form:hidden path="id" value="${product.id}" />
 			<form:hidden path="imageUrl" value="${product.imageUrl}" />
 			

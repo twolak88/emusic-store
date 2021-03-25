@@ -11,11 +11,9 @@
 			<p class="lead">Fill below information to add new Product</p>
 		</div>
 		<form:form method="post" 
-				action="${pageContext.request.contextPath}/admin/productInventory/addProduct" 
+				action="${pageContext.request.contextPath}/admin/productInventory/addProduct?${_csrf.parameterName}=${_csrf.token}" 
 				modelAttribute="product"
 				enctype="multipart/form-data">
-				
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				
 			<div class="form-group mb-3">
 				<label for="name" class="form-label fw-bold">Name</label>
