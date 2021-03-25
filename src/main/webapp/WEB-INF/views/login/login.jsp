@@ -1,6 +1,6 @@
 <%@include file="/WEB-INF/views/template/header.jsp"%>
 <div class="container-wrapper" style="padding-top: 5rem;">
-	<div class="container">
+	<div class="login-container">
 		<div id="login-box">
 			<h2>Login with Username and Password</h2>
 			<c:if test="${not empty messge}">
@@ -18,7 +18,7 @@
 					<label for="password">Password</label>
 					<input type="password" id="password" name="password" class="form-control" />
 				</div>
-				<input type="submit" value="submit" class="btn btn-success" />
+				<input type="submit" value="submit" class="btn btn-success mt-2" />
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			</form>
 		</div>
