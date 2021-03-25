@@ -14,7 +14,8 @@
 				action="${pageContext.request.contextPath}/admin/productInventory/edit" 
 				modelAttribute="product"
 				enctype="multipart/form-data">
-				
+			
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<form:hidden path="id" value="${product.id}" />
 			<form:hidden path="imageUrl" value="${product.imageUrl}" />
 			

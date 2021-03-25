@@ -25,20 +25,20 @@ public class ImageServiceImpl implements ImageService {
 			if (imagePath.isBlank()) {
 				do {
 					String extension = FilenameUtils.getExtension(productImage.getOriginalFilename());
-					pathToReturn = "//resources//images//" + UUID.randomUUID().toString() + "." + extension;
-					path = Paths.get(rootPath + "//WEB-INF" + pathToReturn);
+					pathToReturn = "/resources/images/" + UUID.randomUUID().toString() + "." + extension;
+					path = Paths.get(rootPath + "/WEB-INF" + pathToReturn);
 				} while(Files.exists(path));
 			} else {
 				String extension = FilenameUtils.getExtension(productImage.getOriginalFilename());
 				
-				oldPath = Paths.get(rootPath + "//WEB-INF" + pathToReturn);
+				oldPath = Paths.get(rootPath + "/WEB-INF" + pathToReturn);
 				
 				if (!FilenameUtils.isExtension(imagePath, extension)) {
 					imagePath = FilenameUtils.removeExtension(imagePath);
 					imagePath = imagePath + "." + extension;
 				}
 				pathToReturn = imagePath;
-				path = Paths.get(rootPath + "//WEB-INF" + pathToReturn);
+				path = Paths.get(rootPath + "/WEB-INF" + pathToReturn);
 			}
 			try {
 				if (oldPath != null) {
@@ -56,7 +56,7 @@ public class ImageServiceImpl implements ImageService {
 
 	@Override
 	public void deleteProductImage(String rootPath, String imagePath) {
-		Path path = Paths.get(rootPath + "//WEB-INF" + imagePath);
+		Path path = Paths.get(rootPath + "/WEB-INF" + imagePath);
 
 		try {
 			Files.deleteIfExists(path);
