@@ -4,11 +4,11 @@
 		<div id="login-box">
 			<h2>Login with Username and Password</h2>
 			<c:if test="${not empty messge}">
-				<div class="msg">${messge}</div>
+				<div class="msg text-primary">${messge}</div>
 			</c:if>
 			<form name="loginForm" action="<c:url value="/j_spring_security_check" />" method="post">
 				<c:if test="${not empty errorMessge}">
-					<div class="error" style="color: red;">${errorMessge}</div>
+					<div class="error text-danger">${errorMessge}</div>
 				</c:if>
 				<div class="form-group">
 					<label for="username">Login</label>

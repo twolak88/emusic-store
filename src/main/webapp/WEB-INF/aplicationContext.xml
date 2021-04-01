@@ -82,17 +82,18 @@
 	</bean>
 	
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_USER')"/>
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/customer/**" access="hasRole('ROLE_USER')"/>
 		<security:form-login
 			login-page="/login"
 			login-processing-url="/j_spring_security_check" 
-			default-target-url="/admin/"
+			default-target-url="/products"
 			authentication-failure-url="/login?error"
 			authentication-failure-handler-ref="authenticationFailureHandler"
 			username-parameter="username"
 			password-parameter="password"/>
 		<security:logout 
-			logout-success-url="/login?logout" 
+			logout-success-url="/login?logout=true" 
 			invalidate-session="true" 
 			logout-url="/logout"
 			delete-cookies="JSESSIONID" />

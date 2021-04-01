@@ -22,7 +22,7 @@ public class ImageServiceImpl implements ImageService {
 		Path oldPath = null;
 		
 		if (productImage != null && !productImage.isEmpty()) {
-			if (imagePath.isBlank()) {
+			if (imagePath == null || imagePath.isBlank()) {
 				do {
 					String extension = FilenameUtils.getExtension(productImage.getOriginalFilename());
 					pathToReturn = "/resources/images/" + UUID.randomUUID().toString() + "." + extension;

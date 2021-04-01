@@ -6,22 +6,19 @@
 <div class="container-wrapper" style="padding-top: 5rem;">
 	<div class="container">
 		<div class="page-header">
-			<h1>Edit Product</h1>
+			<h1>Add Product</h1>
 
-			<p class="lead">Fill below information to update Product: ${product.name}</p>
+			<p class="lead">Fill below information to add new Product</p>
 		</div>
 		<form:form method="post" 
-				action="${pageContext.request.contextPath}/admin/productInventory/edit?${_csrf.parameterName}=${_csrf.token}" 
+				action="${pageContext.request.contextPath}/admin/products/add?${_csrf.parameterName}=${_csrf.token}" 
 				modelAttribute="product"
 				enctype="multipart/form-data">
-			
-			<form:hidden path="id" value="${product.id}" />
-			<form:hidden path="imageUrl" value="${product.imageUrl}" />
-			
+				
 			<div class="form-group mb-3">
 				<label for="name" class="form-label fw-bold">Name</label>
 				<form:errors path="name" cssStyle="color: red" />
-				<form:input path="name" id="name" class="form-control" value="${product.name}" />
+				<form:input path="name" id="name" class="form-control" />
 			</div>
 			
 			<div class="form-group mb-3">
@@ -42,13 +39,13 @@
 			
 			<div class="form-group mb-3">
 				<label for="description" class="form-label fw-bold">Description</label>
-				<form:textarea rows="3" path="description" id="description" class="form-control" value="${product.description}" />
+				<form:textarea rows="3" path="description" id="description" class="form-control" />
 			</div>
 			
 			<div class="form-group mb-3">
 				<label for="price" class="form-label fw-bold">Price</label>
 				<form:errors path="price" cssStyle="color: red" />
-				<form:input path="price" id="price" type="number" class="form-control" value="${product.price}" />
+				<form:input path="price" id="price" type="number" class="form-control" />
 			</div>
 			
 			<div class="form-group mb-3">
@@ -78,12 +75,12 @@
 			<div class="form-group mb-3">
 				<label for="unitInStock" class="form-label fw-bold">Unit In Stock</label>
 				<form:errors path="unitInStock" cssStyle="color: red" />
-				<form:input path="unitInStock" id="unitInStock" type="number" class="form-control" value="${product.unitInStock}" />
+				<form:input path="unitInStock" id="unitInStock" type="number" class="form-control" />
 			</div>
 			
 			<div class="form-group mb-3">
 				<label for="manufacturer" class="form-label fw-bold">Manufacturer</label>
-				<form:input path="manufacturer" id="manufacturer" class="form-control" value="${product.manufacturer}" />
+				<form:input path="manufacturer" id="manufacturer" class="form-control" />
 			</div>
 			
 			<div class="form-group mb-5">
@@ -92,7 +89,7 @@
 			</div>
 			
 			<input type="submit" value="Submit" class="btn btn-success" />
-			<a href="<spring:url value="/admin/productInventory" />" class="btn btn-danger">Cancel</a>
+			<a href="<spring:url value="/admin/products" />" class="btn btn-danger">Cancel</a>
 		</form:form>
 	</div>
 </div>

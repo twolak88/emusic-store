@@ -48,4 +48,6 @@ public class BillingAddress implements Serializable {
 		return "BillingAddress [streetName=" + streetName + ", appartamentNumber=" + appartamentNumber + ", city="
 				+ city + ", state=" + state + ", country=" + country + ", zipCode=" + zipCode + "]";
 	}
+	
+	
 }

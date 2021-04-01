@@ -24,7 +24,7 @@
 		</security:authorize>
 
 		<h3>
-			<a href="<spring:url value="/admin/productInventory" />">Product Inventory</a>
+			<a href="<spring:url value="/admin/products" />">Product Inventory</a>
 		</h3>
 		<p>Here you can view, check and modify the product inventory</p>
 		

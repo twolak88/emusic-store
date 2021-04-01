@@ -19,9 +19,10 @@ public class LoginController {
             errorMessge = (String) request.getSession().getAttribute("AUTH_ERROR");
         }
         if(logout != null) {
-        	messge = "You have been successfully logged out !!";
+        	messge = "You have been successfully logged out.";
         }
         model.addAttribute("errorMessge", errorMessge);
+        model.addAttribute("messge", messge);
         return "login/login";
 	}
 	

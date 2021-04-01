@@ -1,4 +1,4 @@
-package com.twolak.emusicstore.controller;
+package com.twolak.emusicstore.controller.admin;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -16,70 +16,58 @@ import com.twolak.emusicstore.model.Product;
 import com.twolak.emusicstore.services.ProductService;
 
 @Controller
-@RequestMapping(value = "/admin")
-public class AdminController {
+@RequestMapping("/admin")
+public class AdminProductController {
 	
 	private final ProductService productService;
 	
-	public AdminController(ProductService productService) {
+	public AdminProductController(ProductService productService) {
 		this.productService = productService;
 	}
 
-	@GetMapping
-	public String adminPage() {
-		return "admin/admin";
-	}
-	
-	@GetMapping("/productInventory")
-	public String productInventory(Model model){
-		Iterable<Product> products = this.productService.getAllProducts();
-		model.addAttribute("products", products);
-		return "admin/productInventory";
-	}
-	
-	@GetMapping("/productInventory/addProduct")
+	@GetMapping("/products/add")
 	public String addProduct(Model model) {
 		model.addAttribute("product", this.productService.getNewProduct());
-		return "admin/addProduct";
+		return "admin/product/add";
 	}
 	
-	@PostMapping("/productInventory/addProduct")
+	@PostMapping("/products/add")
 	public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, HttpServletRequest request) {
 		
 		if (bindingResult.hasErrors()) {
-			return "admin/addProduct";
+			return "admin/product/add";
 		}
 		
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 		this.productService.addProduct(product, rootDirectory);
 		
-		return "redirect:/admin/productInventory";
+		return "redirect:/admin/products";
 	}
 	
-	@GetMapping("/productInventory/delete/{id}")
+	@GetMapping("/products/delete/{id}")
 	public String deleteProduct(@PathVariable("id") Long id, HttpServletRequest request) {
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 		this.productService.deleteProduct(id, rootDirectory);
-		return "redirect:/admin/productInventory";
+		return "redirect:/admin/products";
 	}
 	
-	@GetMapping("/productInventory/edit/{id}")
+	@GetMapping("/products/edit/{id}")
 	public String editProduct(@PathVariable("id") Long id, Model model) {
 		Product product = this.productService.getProductById(id);
 		model.addAttribute("product", product);
-		return "admin/editProduct";
+		return "admin/product/edit";
 	}
 	
-	@PostMapping("/productInventory/edit")
+	@PostMapping("/products/edit")
 	public String updateProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model model, HttpServletRequest request) {
 		
 		if (bindingResult.hasErrors()) {
-			return "admin/editProduct";
+			return "admin/product/edit";
 		}
 		
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 		this.productService.updateProduct(product, rootDirectory);
 		
-		return "redirect:/admin/productInventory";
+		return "redirect:/admin/products";
 	}
 }
