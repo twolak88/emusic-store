@@ -1,15 +1,23 @@
 package com.twolak.emusicstore.model;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.HashSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -24,9 +32,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Cart {
+@Table(name = "carts")
+public class Cart implements Serializable {
 	
+	private static final long serialVersionUID = 921872818895631695L;
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	
 	@Builder.Default
@@ -36,6 +48,15 @@ public class Cart {
 	
 	@Builder.Default
 	private double grandTotal = 0;
+	
+	@ManyToOne
+	@JoinColumn(name = "customer_id")
+	@JsonBackReference
+	private Customer customer;
+	
+	@OneToOne(mappedBy = "cart")
+	@JsonManagedReference
+	private Order order;
 	
 	public void addCartItem(CartItem cartItem) {
 		Optional<CartItem> foundItem = this.cartItems.stream()

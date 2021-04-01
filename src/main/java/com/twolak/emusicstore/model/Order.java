@@ -8,11 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,32 +23,34 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
-@Table(name = "cart_items")
-public class CartItem implements Serializable {
+@Table(name = "customers")
+public class Order implements Serializable {
 	
-	private static final long serialVersionUID = 5620185313736707730L;
+	private static final long serialVersionUID = -9081705810883360431L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="product_id", nullable=false)
+	@OneToOne
+	@JoinColumn(name = "cart_id")
 	@JsonBackReference
-	private Product product;
+	private Cart cart;
 	
-	private int quantity;
-	private double totalPrice;
+	@ManyToOne
+	@JoinColumn(name = "castomer_id")
+	@JsonBackReference
+	Customer customer;
 	
-    @ManyToOne
-    @JoinColumn(name="cart_id", nullable=false)
-    @JsonBackReference
-    private Cart cart;
+	@ManyToOne
+	@JoinColumn(name = "billing_address_id")
+	@JsonBackReference
+	private BillingAddress billingAddress;
 	
-	public CartItem(Product product) {
-		this.product = product;
-		this.quantity = 1;
-		this.totalPrice = product.getPrice();
-	}
+	@ManyToOne
+	@JoinColumn(name = "shipping_address_id")
+	@JsonBackReference
+	private ShippingAddress shippingAddress;
 }
