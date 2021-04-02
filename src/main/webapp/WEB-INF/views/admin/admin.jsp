@@ -15,11 +15,11 @@
 		    <h2>
 		    	Authenticated as <security:authentication property="principal.username" />
 <%-- 		    	| <a href="<c:url value="/logout" />">Logout</a> --%>
-				<c:url var="logoutUrl" value="/logout"/>
-				<form action="${logoutUrl}" method="post">
-				    <input type="submit" value="Logout" class="btn btn-primary" />
-				    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				</form>
+<%-- 				<c:url var="logoutUrl" value="/logout"/> --%>
+<%-- 				<form action="${logoutUrl}" method="post"> --%>
+<!-- 				    <input type="submit" value="Logout" class="btn btn-primary" /> -->
+<%-- 				    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+<!-- 				</form> -->
 		    </h2>
 		</security:authorize>
 

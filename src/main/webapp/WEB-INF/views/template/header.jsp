@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -69,17 +70,29 @@ body {
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/products" />">Products</a></li>
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/" />">Contact</a></li>
 					</ul>
+					<sec:authorize access="isAuthenticated()">
+						<ul class="navbar-nav mb-2 mb-md-0 pull-right">
+							<li class="nav-item">
+								<a class="nav-link" href="<spring:url value="/cart" />">
+								 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+									<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+								 </svg>
+							 	Cart</a>
+							</li>
+						</ul>
+					</sec:authorize>
 					<ul class="navbar-nav mb-2 mb-md-0 pull-right">
-						<li class="nav-item">
-							<a class="nav-link" href="<spring:url value="/cart" />">
-							 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-								<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-							 </svg>
-						 	Cart</a>
-						</li>
-					</ul>
-					<ul class="navbar-nav mb-2 mb-md-0 pull-right">
-						<li class="nav-item"><a class="nav-link" href="<c:url value="/admin" />">Admin</a></li>
+						<sec:authorize access="isAuthenticated()">
+							<li class="nav-item"><a class="nav-link">Welcome: ${pageContext.request.userPrincipal.name}</a></li>
+							<li class="nav-item"><a class="nav-link" href="<c:url value="/logout" />" >Logout</a></li>
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
+								<li class="nav-item"><a class="nav-link" href="<c:url value="/admin" />">Admin</a></li>
+							</sec:authorize>
+						</sec:authorize>
+						<sec:authorize access="!isAuthenticated()">
+							<li class="nav-item"><a class="nav-link" href="<c:url value="/login" />">Login</a></li>
+							<li class="nav-item"><a class="nav-link" href="<c:url value="/register" />">Register</a></li>
+						</sec:authorize>
 					</ul>
 <!-- 					<form class="d-flex"> -->
 <!-- 						<input class="form-control me-2" type="search" -->
