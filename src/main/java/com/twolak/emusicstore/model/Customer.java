@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -39,14 +42,19 @@ public class Customer implements Serializable {
 	private Long id;
 	
 	@NotBlank(message = "The customer name shouldn't be empty.")
+	@Column(unique = true)
 	private String name;
 	
+	@Email(message = "The customer email should be valid.")
 	@NotBlank(message = "The customer email shouldn't be empty.")
+	@Column(unique = true)
 	private String email;
 	
+	@Column(unique = true)
 	private String phone;
 	
 	@NotBlank(message = "The customer username shouldn't be empty.")
+	@Column(unique = true)
 	private String username;
 	
 	@NotBlank(message = "The customer password shouldn't be empty.")
@@ -54,12 +62,12 @@ public class Customer implements Serializable {
 	
 	private boolean enabled;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "billing_address_id")
 	@JsonBackReference
 	private BillingAddress billingAddress;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "shipping_address_id")
 	@JsonBackReference
 	private ShippingAddress shippingAddress;
@@ -73,4 +81,9 @@ public class Customer implements Serializable {
 	@OneToMany(mappedBy = "customer")
 	@JsonManagedReference
 	private Set<Order> orders = new HashSet<>();
+	
+	public void addCart(Cart cart) {
+		this.carts.add(cart);
+		cart.setCustomer(this);
+	}
 }

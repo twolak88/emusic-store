@@ -25,7 +25,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "customers")
+@Table(name = "orders")
 public class Order implements Serializable {
 	
 	private static final long serialVersionUID = -9081705810883360431L;
@@ -40,7 +40,7 @@ public class Order implements Serializable {
 	private Cart cart;
 	
 	@ManyToOne
-	@JoinColumn(name = "castomer_id")
+	@JoinColumn(name = "customer_id")
 	@JsonBackReference
 	Customer customer;
 	

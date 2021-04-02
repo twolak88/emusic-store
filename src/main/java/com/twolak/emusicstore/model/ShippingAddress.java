@@ -21,9 +21,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
-@Table(name = "shipping_address")
+@Table(name = "shipping_addresses")
 public class ShippingAddress implements Serializable {
 	
 	private static final long serialVersionUID = 8763398016085759702L;
@@ -33,7 +32,7 @@ public class ShippingAddress implements Serializable {
 	private Long id;
 	
 	private String streetName;
-	private String appartamentNumber;
+	private String apartmentNumber;
 	private String city;
 	private String state;
 	private String country;
@@ -45,7 +44,7 @@ public class ShippingAddress implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ShippingAddress [streetName=" + streetName + ", appartamentNumber=" + appartamentNumber + ", city="
-				+ city + ", state=" + state + ", country=" + country + ", zipCode=" + zipCode + "]";
+		return "ShippingAddress [streetName=" + streetName + ", apartmentNumber=" + apartmentNumber + ", city=" + city
+				+ ", state=" + state + ", country=" + country + ", zipCode=" + zipCode + "]";
 	}
 }

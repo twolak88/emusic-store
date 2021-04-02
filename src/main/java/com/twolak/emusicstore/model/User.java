@@ -1,11 +1,11 @@
 package com.twolak.emusicstore.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,9 +25,12 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(unique = true)
 	private String username;
 	private String password;
 	private boolean enabled;
+	
+	@Column(unique = true)
 	private Long customerId;
 	
 //	@Builder.Default
