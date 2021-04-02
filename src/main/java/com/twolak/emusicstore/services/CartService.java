@@ -1,6 +1,7 @@
 package com.twolak.emusicstore.services;
 
 import com.twolak.emusicstore.model.Cart;
+import com.twolak.emusicstore.model.Customer;
 
 public interface CartService {
 
@@ -15,5 +16,7 @@ public interface CartService {
 	void removeItem(String sessionId, Long productId);
 
 	void removeItems(String sessionId);
+
+	void createCustomerCart(Customer savedCustomer);
 
 }

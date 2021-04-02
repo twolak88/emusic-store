@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.twolak.emusicstore.model.Cart;
 import com.twolak.emusicstore.model.CartItem;
+import com.twolak.emusicstore.model.Customer;
 import com.twolak.emusicstore.model.Product;
 import com.twolak.emusicstore.repositories.CartRepository;
 import com.twolak.emusicstore.services.CartService;
@@ -88,5 +89,12 @@ public class CartServiceImpl implements CartService {
 		Cart cart = Cart.builder().id(sessionId).build();
 		cart.addCartItem(new CartItem(product));
 		return cart;
+	}
+
+	@Override
+	public void createCustomerCart(Customer savedCustomer) {
+		Cart cart = Cart.builder().build();
+		savedCustomer.addCart(cart);
+		this.cartRepository.save(cart);
 	}
 }
