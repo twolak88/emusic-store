@@ -49,6 +49,8 @@ public class Cart implements Serializable {
 	@Builder.Default
 	private double grandTotal = 0;
 	
+	private boolean active;
+	
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	@JsonBackReference

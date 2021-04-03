@@ -93,7 +93,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public void createCustomerCart(Customer savedCustomer) {
-		Cart cart = Cart.builder().build();
+		Cart cart = Cart.builder().active(true).build();
 		savedCustomer.addCart(cart);
 		this.cartRepository.save(cart);
 	}

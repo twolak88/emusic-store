@@ -1,4 +1,4 @@
-package com.twolak.emusicstore.controller;
+package com.twolak.emusicstore.controller.cart;
 
 import javax.servlet.http.HttpServletRequest;
 

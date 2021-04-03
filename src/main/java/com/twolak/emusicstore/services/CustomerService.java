@@ -10,4 +10,8 @@ public interface CustomerService {
 	Customer getCustomerById(Long id);
 	
 	Iterable<Customer> getAllCustomers();
+
+	Customer getCustomerByUsername(String username);
+
+	String getActiveCartForCustomer(Customer customer);
 }

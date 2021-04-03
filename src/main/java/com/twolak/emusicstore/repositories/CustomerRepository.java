@@ -7,4 +7,5 @@ import com.twolak.emusicstore.model.Customer;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long>{
+	Customer findByUsername(String username);
 }

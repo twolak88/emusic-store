@@ -75,4 +75,18 @@ public class CustomerServiceImpl implements CustomerService{
 	public Iterable<Customer> getAllCustomers() {
 		return this.customerRepository.findAll();
 	}
+
+	@Override
+	public Customer getCustomerByUsername(String username) {
+		return this.customerRepository.findByUsername(username);
+	}
+
+	@Override
+	public String getActiveCartForCustomer(Customer customer) {
+		return customer.getCarts()
+				.stream()
+				.filter(cart -> cart.isActive())
+				.findFirst()
+				.orElseThrow(() -> new RuntimeException("There is no active cart for customer " + customer.getUsername())).getId();
+	}
 }
