@@ -25,14 +25,14 @@ public class CartServiceImpl implements CartService {
 	
 	@Transactional
 	@Override
-	public Cart readCart(String cartId) {
+	public Cart getCartById(Long cartId) {
 		return this.cartRepository.findById(cartId)
 				.orElseThrow(() -> new RuntimeException("Cart not found by id " + cartId));
 	}
 
 	@Transactional
 	@Override
-	public void update(String cartId, Cart cart) {
+	public void update(Long cartId, Cart cart) {
 		Cart foundCart = this.cartRepository.findById(cartId)
 				.orElseThrow(() -> new RuntimeException("Cart not found by id " + cartId));
 		foundCart.setCartItems(cart.getCartItems());
@@ -43,32 +43,21 @@ public class CartServiceImpl implements CartService {
 
 	@Transactional
 	@Override
-	public void delete(String cartId) {
+	public void delete(Long cartId) {
 		this.cartRepository.deleteById(cartId);
 	}
 
 	@Transactional
 	@Override
-	public Cart addItem(String sessionId, Long productId) {
-		Cart cart = this.cartRepository.findById(sessionId).orElse(null);
-		
+	public Cart addItem(Cart cart, Long productId) {
 		Product product = this.productService.getProductById(productId);
-		
-		if (cart == null) {
-			cart = this.create(sessionId, product);
-		} else {
-			cart.addCartItem(new CartItem(product));
-		}
+		cart.addCartItem(new CartItem(product));
 		return this.cartRepository.save(cart);
 	}
 	
 	@Transactional
 	@Override
-	public void removeItem(String sessionId, Long productId) {
-		Cart cart = this.cartRepository.findById(sessionId).orElse(null);
-		if (cart == null) {
-			cart = Cart.builder().id(sessionId).build();
-		}
+	public void removeItem(Cart cart, Long productId) {
 		Product product = this.productService.getProductById(productId);
 		cart.removeCartItem(product);
 		this.cartRepository.save(cart);
@@ -76,19 +65,9 @@ public class CartServiceImpl implements CartService {
 	
 	@Transactional
 	@Override
-	public void removeItems(String sessionId) {
-		Cart cart = this.cartRepository.findById(sessionId).orElse(null);
-		if (cart == null) {
-			cart = Cart.builder().id(sessionId).build();
-		}
+	public void removeItems(Cart cart) {
 		cart.removeCartItems();
 		this.cartRepository.save(cart);
-	}
-
-	private Cart create(String sessionId, Product product) {
-		Cart cart = Cart.builder().id(sessionId).build();
-		cart.addCartItem(new CartItem(product));
-		return cart;
 	}
 
 	@Override

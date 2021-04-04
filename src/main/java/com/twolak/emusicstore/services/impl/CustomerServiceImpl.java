@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.twolak.emusicstore.model.Authorities;
 import com.twolak.emusicstore.model.BillingAddress;
+import com.twolak.emusicstore.model.Cart;
 import com.twolak.emusicstore.model.Customer;
 import com.twolak.emusicstore.model.ShippingAddress;
 import com.twolak.emusicstore.model.User;
@@ -58,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService{
 		User savedUser = this.userRepository.save(user);
 		Authorities authorities = Authorities.builder()
 				.username(savedUser.getUsername())
-				.authority("USER_ROLE")
+				.authority("ROLE_USER")
 				.build();
 		this.authoritiesRepository.save(authorities);
 		this.cartService.createCustomerCart(savedCustomer);
@@ -76,17 +77,18 @@ public class CustomerServiceImpl implements CustomerService{
 		return this.customerRepository.findAll();
 	}
 
-	@Override
-	public Customer getCustomerByUsername(String username) {
-		return this.customerRepository.findByUsername(username);
-	}
+//	@Override
+//	public Customer getCustomerByUsername(String username) {
+//		return this.customerRepository.findByUsername(username);
+//	}
 
 	@Override
-	public String getActiveCartForCustomer(Customer customer) {
+	public Cart getActiveCartForCustomer(String username) {
+		Customer customer = this.customerRepository.findByUsername(username);
 		return customer.getCarts()
 				.stream()
 				.filter(cart -> cart.isActive())
 				.findFirst()
-				.orElseThrow(() -> new RuntimeException("There is no active cart for customer " + customer.getUsername())).getId();
+				.orElseThrow(() -> new RuntimeException("There is no active cart for customer " + customer.getUsername()));
 	}
 }

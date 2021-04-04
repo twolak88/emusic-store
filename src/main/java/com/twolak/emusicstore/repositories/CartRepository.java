@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.twolak.emusicstore.model.Cart;
 
 @Repository
-public interface CartRepository extends CrudRepository<Cart, String>{
+public interface CartRepository extends CrudRepository<Cart, Long>{
 }

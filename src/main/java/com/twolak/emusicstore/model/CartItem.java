@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +34,7 @@ public class CartItem implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="product_id", nullable=false)
-	@JsonBackReference
+	@JsonManagedReference
 	private Product product;
 	
 	private int quantity;

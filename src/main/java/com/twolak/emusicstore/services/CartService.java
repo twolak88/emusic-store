@@ -5,17 +5,17 @@ import com.twolak.emusicstore.model.Customer;
 
 public interface CartService {
 
-	Cart readCart(String cartId);
+	Cart getCartById(Long cartId);
 
-	void update(String cartId, Cart cart);
+	void update(Long cartId, Cart cart);
 
-	void delete(String cartId);
+	void delete(Long cartId);
 
-	Cart addItem(String sessionId, Long productId);
+	Cart addItem(Cart cart, Long productId);
 
-	void removeItem(String sessionId, Long productId);
+	void removeItem(Cart cart, Long productId);
 
-	void removeItems(String sessionId);
+	void removeItems(Cart cart);
 
 	void createCustomerCart(Customer savedCustomer);
 

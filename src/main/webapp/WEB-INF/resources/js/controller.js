@@ -32,13 +32,13 @@ cartApp.controller("cartCtrl", ($scope, $http) => {
 				if ($scope.cartId === null || $scope.cartId === undefined) {
 					$scope.initCartId(data.data.id);
 				}
-				$scope.refreshCart()
-					alert("Product successfully added to cart id " + data.data.id);
-				});
+				//$scope.refreshCart();
+				alert("Product successfully added to cart id " + data.data.id);
+			});
 	};
 	
 	$scope.removeFromCart = (productId) => {
 		$http.put("/emusic-store/rest/cart/remove/" + productId)
-			.then(data => $scope.refreshCart());
+			.then(() => $scope.refreshCart());
 	};
 });

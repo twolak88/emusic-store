@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +17,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -77,7 +75,7 @@ public class Product implements Serializable {
 	private MultipartFile image;
 	
 	@Builder.Default
-	@OneToMany(mappedBy="product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JsonManagedReference
+	@OneToMany(mappedBy="product")
+	@JsonBackReference
 	private Set<CartItem> cartItems = new HashSet<>();
 }

@@ -1,5 +1,6 @@
 package com.twolak.emusicstore.services;
 
+import com.twolak.emusicstore.model.Cart;
 import com.twolak.emusicstore.model.Customer;
 
 public interface CustomerService {
@@ -11,7 +12,7 @@ public interface CustomerService {
 	
 	Iterable<Customer> getAllCustomers();
 
-	Customer getCustomerByUsername(String username);
+//	Customer getCustomerByUsername(String username);
 
-	String getActiveCartForCustomer(Customer customer);
+	Cart getActiveCartForCustomer(String username);
 }
