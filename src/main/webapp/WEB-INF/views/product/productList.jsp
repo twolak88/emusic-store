@@ -10,6 +10,7 @@
 		
 		$('.table').DataTable({
 			"lengthMenu": [[1,2,3,5,10,-1], [1,2,3,5,10,"All Products"]],
+			"pageLength": 3,
 			"oSearch": {"sSearch": searchCondition}
 		});
 	});
