@@ -36,7 +36,7 @@
 					 <h4>${ product.price } PLN</h4>
 					 
 					 <c:set var="role" scope="page" value="${param.role}" />
-					 <c:set var="url" scope="page" value="/products" />
+					 <c:set var="url" scope="page" value="/products/all" />
 					 <c:if test="${role='admin'}">
 					 	<c:set var="url" scope="page" value="/admin/products" />
 					 </c:if>

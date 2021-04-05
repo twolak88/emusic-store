@@ -3,6 +3,18 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@include file="/WEB-INF/views/template/header.jsp"%>
+
+<script>
+	$(document).ready(() => {
+		var searchCondition = '${searchCondition}';
+		
+		$('.table').DataTable({
+			"lengthMenu": [[1,2,3,5,10,-1], [1,2,3,5,10,"All Products"]],
+			"oSearch": {"sSearch": searchCondition}
+		});
+	});
+</script>
+
 <div class="container-wrapper" style="padding-top: 5rem;">
 	<div class="container">
 		<div class="page-header">

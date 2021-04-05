@@ -23,6 +23,8 @@
 <!-- Bootstrap core CSS -->
 <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 
+<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 
 <!-- Custom styles for this template -->
@@ -30,7 +32,14 @@
 
 <!-- Angular JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- JQuery Data Tables -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
+
 <style>
 body {
   padding-top: 3.5rem;
@@ -67,8 +76,8 @@ body {
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<li class="nav-item"><a class="nav-link" href="<c:url value="/" />">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="<c:url value="/products" />">Products</a></li>
-						<li class="nav-item"><a class="nav-link" href="<c:url value="/" />">Contact</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value="/products/all" />">Products</a></li>
+						<li class="nav-item"><a class="nav-link" href="<c:url value="/about" />">About Us</a></li>
 					</ul>
 					<sec:authorize access="isAuthenticated()">
 						<ul class="navbar-nav mb-2 mb-md-0 pull-right">

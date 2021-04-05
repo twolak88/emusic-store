@@ -3,7 +3,11 @@
 <div class="container-wrapper" style="padding-top: 5rem;">
 	<div class="container">
 		<div class="page-header">
-			<h1>Invalid Cart</h1>
+			<h1>About Us</h1>
+
+			<p class="lead">We are the best music store in the world.</p>
+			
+			<img alt="Store Image" src="<c:url value="/resources/images/showroom.jpg" />" />
 		</div>
 		<section class="container">
 			<p>

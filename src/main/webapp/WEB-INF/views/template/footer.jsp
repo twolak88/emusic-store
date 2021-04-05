@@ -11,6 +11,5 @@
 	</p>
 </footer>
 </main>
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </body>
 </html>
