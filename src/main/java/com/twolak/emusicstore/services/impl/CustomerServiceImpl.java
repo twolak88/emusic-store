@@ -1,9 +1,14 @@
 package com.twolak.emusicstore.services.impl;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import javax.transaction.Transactional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import com.twolak.emusicstore.model.Authorities;
 import com.twolak.emusicstore.model.BillingAddress;
@@ -90,5 +95,24 @@ public class CustomerServiceImpl implements CustomerService{
 				.filter(cart -> cart.isActive())
 				.findFirst()
 				.orElseThrow(() -> new RuntimeException("There is no active cart for customer " + customer.getUsername()));
+	}
+
+	@Override
+	public boolean validateCustomer(Customer customer, BindingResult bindingResult) {
+		boolean isValid = true;
+		Collection<Customer> customers = StreamSupport.stream(this.customerRepository.findAll().spliterator(), false).collect(Collectors.toSet());
+				this.customerRepository.findAll();
+		
+		if (customers.stream().anyMatch(item -> item.getUsername().equals(customer.getUsername()))) {
+			bindingResult.rejectValue("username", "error.customer", "Customer with the username already exists.");
+			isValid = false;
+		}
+		
+		if (customers.stream().anyMatch(item -> item.getEmail().equals(customer.getEmail()))) {
+			bindingResult.rejectValue("email", "error.customer", "Customer with the email already exists.");
+			isValid = false;
+		}
+		
+		return isValid;
 	}
 }

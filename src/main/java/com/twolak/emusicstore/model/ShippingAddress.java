@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -30,11 +31,22 @@ public class ShippingAddress implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "The Street Name should not be empty.")
 	private String streetName;
+	
+	@NotBlank(message = "The Apartment Number should not be empty.")
 	private String apartmentNumber;
+	
+	@NotBlank(message = "The City should not be empty.")
 	private String city;
+	
+	@NotBlank(message = "The State should not be empty.")
 	private String state;
+	
+	@NotBlank(message = "The Country should not be empty.")
 	private String country;
+	
+	@NotBlank(message = "The Zip Code should not be empty.")
 	private String zipCode;
 	
 	@OneToOne(mappedBy = "shippingAddress")

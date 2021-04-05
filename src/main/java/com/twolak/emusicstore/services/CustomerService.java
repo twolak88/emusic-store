@@ -1,5 +1,7 @@
 package com.twolak.emusicstore.services;
 
+import org.springframework.validation.BindingResult;
+
 import com.twolak.emusicstore.model.Cart;
 import com.twolak.emusicstore.model.Customer;
 
@@ -15,4 +17,6 @@ public interface CustomerService {
 //	Customer getCustomerByUsername(String username);
 
 	Cart getActiveCartForCustomer(String username);
+
+	boolean validateCustomer(Customer customer, BindingResult bindingResult);
 }

@@ -33,7 +33,7 @@ public class RegisterController {
 	@PostMapping
 	public String registerCustomerPost(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) {
 		
-		if(bindingResult.hasErrors()) {
+		if(bindingResult.hasErrors() || !this.customerService.validateCustomer(customer, bindingResult)) {
 			return "customer/register";
 		}
 		this.customerService.addCustomer(customer);
