@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security
+						http://www.springframework.org/schema/security/spring-security.xsd ">
+
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/customer/**" access="hasRole('ROLE_USER')"/>
+		<security:form-login
+			login-page="/login"
+			login-processing-url="/j_spring_security_check" 
+			default-target-url="/products/all"
+			authentication-failure-url="/login?error"
+			authentication-failure-handler-ref="authenticationFailureHandler"
+			username-parameter="username"
+			password-parameter="password"/>
+		<security:logout 
+			logout-success-url="/login?logout=true" 
+			invalidate-session="true" 
+			logout-url="/logout"
+			delete-cookies="JSESSIONID" />
+		<security:csrf token-repository-ref="csrfTokenRepository"/>
+	</security:http>
+	
+	<bean name="csrfTokenRepository" class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository" />
+	
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource"
+										authorities-by-username-query="SELECT username, authority FROM authorities WHERE username = ?"
+										users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?"/>
+			<security:password-encoder ref="bcryptEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+<!-- 	<security:http-firewall ref="allowSemicolonHttpFirewall"/> -->
+<!-- 	<bean id="allowSemicolonHttpFirewall"  -->
+<!--       class="org.springframework.security.web.firewall.StrictHttpFirewall">  -->
+<!--         <property name="allowSemicolon" value="true"/> -->
+<!--         <property name="allowUrlEncodedSlash" value="true"/> -->
+<!-- 	</bean>  -->
+	
+	<bean name="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<bean id="authenticationFailureHandler" class="com.twolak.emusicstore.security.LoginFailureHandler" />
+	
+</beans>

@@ -9,7 +9,12 @@
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/aplicationContext.xml</param-value>
+		<param-value>
+			/WEB-INF/aplicationContext.xml
+			/WEB-INF/applicationContext-security.xml
+			/WEB-INF/applicationContext-dataAccess.xml
+			/WEB-INF/applicationContext-webflow.xml
+		</param-value>
 	</context-param>
 <!-- The front controller of this Spring Web application, responsible for handling all application requests -->
 	<servlet>
