@@ -5,7 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.twolak.emusicstore.model.Customer;
 import com.twolak.emusicstore.model.Product;
+import com.twolak.emusicstore.services.CustomerService;
 import com.twolak.emusicstore.services.ProductService;
 
 @Controller
@@ -13,9 +15,11 @@ import com.twolak.emusicstore.services.ProductService;
 public class AdminHomeController {
 	
 	private final ProductService productService;
+	private final CustomerService customerService;
 	
-	public AdminHomeController(ProductService productService) {
+	public AdminHomeController(ProductService productService, CustomerService customerService) {
 		this.productService = productService;
+		this.customerService = customerService;
 	}
 
 	@GetMapping
@@ -30,9 +34,10 @@ public class AdminHomeController {
 		return "admin/product/products";
 	}
 	
-	@GetMapping("customer")
+	@GetMapping("/customers")
 	public String customerManagement(Model model) {
-		//TODO: customer service
+		Iterable<Customer> customers = this.customerService.getAllCustomers();
+		model.addAttribute("customers", customers);
 		return "admin/customerManagement";
 	}
 }

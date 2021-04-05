@@ -26,7 +26,12 @@
 		<h3>
 			<a href="<spring:url value="/admin/products" />">Product Inventory</a>
 		</h3>
-		<p>Here you can view, check and modify the product inventory</p>
+		<p>Here you can view, check and modify the product inventory.</p>
+		
+		<h3>
+			<a href="<spring:url value="/admin/customers" />">Customer Management</a>
+		</h3>
+		<p>Here you can view, check and modify the customer information.</p>
 		
 	</div>
 </div>
