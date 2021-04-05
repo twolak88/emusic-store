@@ -18,5 +18,8 @@ public interface CartService {
 	void removeItems(Cart cart);
 
 	void createCustomerCart(Customer savedCustomer);
-
+	
+	void createNextCustomerCart(Cart cart);
+	
+	Cart validate(Long cartId);
 }

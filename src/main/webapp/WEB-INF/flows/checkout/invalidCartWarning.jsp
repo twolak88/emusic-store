@@ -3,9 +3,7 @@
 <div class="container-wrapper" style="padding-top: 5rem;">
 	<div class="container">
 		<div class="page-header">
-			<h1>Register success</h1>
-
-			<p class="lead">You have been registered successfully.</p>
+			<h1>Invalid Cart</h1>
 		</div>
 		<section class="container">
 			<p>

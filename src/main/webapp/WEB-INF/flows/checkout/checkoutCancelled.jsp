@@ -3,9 +3,9 @@
 <div class="container-wrapper" style="padding-top: 5rem;">
 	<div class="container">
 		<div class="page-header">
-			<h1>Register success</h1>
+			<h1 class="alert alert-danger">Checkout cancelled</h1>
 
-			<p class="lead">You have been registered successfully.</p>
+			<p class="lead">Your checkout process is cancelled. You may continue shopping.</p>
 		</div>
 		<section class="container">
 			<p>

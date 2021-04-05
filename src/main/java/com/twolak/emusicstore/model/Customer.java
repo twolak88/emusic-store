@@ -74,17 +74,22 @@ public class Customer implements Serializable {
 	private ShippingAddress shippingAddress;
 	
 	@Builder.Default
-	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Set<Cart> carts = new HashSet<>();
 	
 	@Builder.Default
-	@OneToMany(mappedBy = "customer")
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Set<Order> orders = new HashSet<>();
 	
 	public void addCart(Cart cart) {
 		this.carts.add(cart);
 		cart.setCustomer(this);
+	}
+
+	public void addOrder(Order order) {
+		this.orders.add(order);
+		order.setCustomer(this);
 	}
 }

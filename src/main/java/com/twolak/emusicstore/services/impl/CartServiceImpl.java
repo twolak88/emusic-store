@@ -1,5 +1,7 @@
 package com.twolak.emusicstore.services.impl;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -70,10 +72,33 @@ public class CartServiceImpl implements CartService {
 		this.cartRepository.save(cart);
 	}
 
+	@Transactional
 	@Override
 	public void createCustomerCart(Customer savedCustomer) {
+		this.createNewCart(savedCustomer);
+	}
+	
+	@Transactional
+	@Override
+	public void createNextCustomerCart(Cart cart) {
+		cart.setActive(false);
+		this.cartRepository.save(cart);
+		
+		this.createNewCart(cart.getCustomer());
+	}
+	
+	@Override
+	public Cart validate(Long cartId) {
+		Optional<Cart> cart = this.cartRepository.findById(cartId);
+		if (cart.isEmpty() || cart.get().getCartItems().size() == 0) {
+			throw new RuntimeException("Cart not found by id " + cartId);
+		}
+		return cart.get();
+	}
+	
+	private void createNewCart(Customer customer) {
 		Cart cart = Cart.builder().active(true).build();
-		savedCustomer.addCart(cart);
+		customer.addCart(cart);
 		this.cartRepository.save(cart);
 	}
 }

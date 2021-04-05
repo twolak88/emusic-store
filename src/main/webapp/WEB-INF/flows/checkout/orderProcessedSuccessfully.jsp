@@ -3,13 +3,14 @@
 <div class="container-wrapper" style="padding-top: 5rem;">
 	<div class="container">
 		<div class="page-header">
-			<h1>Register success</h1>
+			<h1>Order success</h1>
 
-			<p class="lead">You have been registered successfully.</p>
+			<p class="lead">Thank you for your order.</p>
+			<p>Your order will be shipped in 2 business days</p>
 		</div>
 		<section class="container">
 			<p>
-				<a href="<spring:url value="/products" />" class="btn btn-success">Products</a>
+				<a href="<spring:url value="/" />" class="btn btn-success">OK</a>
 			</p>
 		</section>
 	</div>
