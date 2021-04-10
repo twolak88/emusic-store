@@ -56,7 +56,7 @@ public class Cart implements Serializable {
 	@JsonBackReference
 	private Customer customer;
 	
-	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Order order;
 	

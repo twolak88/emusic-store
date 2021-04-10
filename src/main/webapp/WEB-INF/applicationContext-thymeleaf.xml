@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Thymeleaf -->
+	<bean id="templateResolver"
+	       class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+	  <property name="prefix" value="/WEB-INF/views/html/" />
+	  <property name="suffix" value=".html" />
+	  <property name="templateMode" value="HTML" />
+	  <property name="cacheable" value="false" />
+	  <property name="checkExistence" value="true" />
+	  <property name="order" value="0" />
+	</bean>
+	
+	<bean id="templateFlowResolver"
+	       class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+	  <property name="prefix" value="/WEB-INF/flows/checkout/html/" />
+	  <property name="suffix" value=".html" />
+	  <property name="templateMode" value="HTML" />
+	  <property name="cacheable" value="false" />
+	  <property name="checkExistence" value="true" />
+	  <property name="order" value="1" />
+	</bean>
+	
+	<bean id="templateEngine"
+	      class="org.thymeleaf.spring5.SpringTemplateEngine">
+	  <property name="templateResolvers">
+	  	<set>
+	  		<ref bean="templateResolver" />
+	  		<ref bean="templateFlowResolver" />
+	  	</set>
+	  </property>
+	  <property name="additionalDialects">
+		<set>
+			<bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
+			<bean class="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect" />
+		</set>
+	  </property>
+	  <property name="enableSpringELCompiler" value="true" />
+	</bean>
+	
+	<bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+	  <property name="templateEngine" ref="templateEngine" />
+	</bean>
+	
+	<bean id="thymeleafFlowViewResolver" class="org.thymeleaf.spring5.webflow.view.AjaxThymeleafViewResolver">
+        <property name="viewClass"  value="org.thymeleaf.spring5.webflow.view.FlowAjaxThymeleafView" />
+        <property name="templateEngine" ref="templateEngine" />
+    </bean>
+	
+	<bean id="mvcViewFactoryCreator" 
+	      class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+	    <property name="viewResolvers" ref="thymeleafFlowViewResolver"/>
+	</bean>
+</beans>

@@ -12,38 +12,43 @@
 		<transition to="collectCustomerInfo" />
 	</action-state>
 	
-	<view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp" model="order">
+	<view-state id="collectCustomerInfo" view="collectCustomerInfo" model="order">
 		<transition on="customerInfoCollected" to="collectShippingDetail" />
 	</view-state>
 	
-	<view-state id="collectShippingDetail" view="collectShippingDetail.jsp" model="order">
+	<view-state id="collectShippingDetail" view="collectShippingDetail" model="order">
 		<transition on="shippingDetailCollected" to="orderConfirmation" />
 		<transition on="backToCollectCustomrInfo" to="collectCustomerInfo" />
 	</view-state>
 	
-	<view-state id="orderConfirmation">
+	<view-state id="orderConfirmation" view="orderConfirmation">
 		<transition on="orderConfirmed" to="processOrder" />
 		<transition on="backToCollectShippingDetail" to="collectShippingDetail" />
 	</view-state>
 	
 	<action-state id="processOrder">
-		<evaluate expression="cartServiceImpl.createNextCustomerCart(order.cart)" />
+		<evaluate expression="cartServiceImpl.processOrder(order.cart)" />
 		<transition to="orderProcessedSuccessfully" />
 	</action-state>
 
-	<view-state id="orderProcessedSuccessfully" model="order">
+	<view-state id="orderProcessedSuccessfully" model="order" view="orderProcessedSuccessfully">
 		<transition to="endState" />
 	</view-state>
 	
 	<end-state id="endState" />
 	
-	<view-state id="invalidCartWarning">
+	<view-state id="invalidCartWarning" view="invalidCartWarning">
 		<transition to="endState" />
 	</view-state>
 	
-	<end-state id="cancelCheckout" view="checkoutCancelled.jsp" />
+	<action-state id="cancelOrder">
+		<evaluate expression="orderServiceImpl.cancelOrder(order.cart)" />
+		<transition to="cancelCheckout" />
+	</action-state>
+	
+	<end-state id="cancelCheckout" view="checkoutCancelled" />
 	
 	<global-transitions>
-		<transition on="cancel" to="cancelCheckout" />
+		<transition on="cancel" to="cancelOrder" />
 	</global-transitions>
 </flow>

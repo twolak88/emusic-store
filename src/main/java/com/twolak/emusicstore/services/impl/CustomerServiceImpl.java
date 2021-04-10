@@ -113,6 +113,16 @@ public class CustomerServiceImpl implements CustomerService{
 			isValid = false;
 		}
 		
+		if (customers.stream().anyMatch(item -> item.getName().equals(customer.getName()))) {
+			bindingResult.rejectValue("name", "error.customer", "Customer with the name already exists.");
+			isValid = false;
+		}
+		
+		if (customers.stream().anyMatch(item -> item.getPhone().equals(customer.getPhone()))) {
+			bindingResult.rejectValue("phone", "error.customer", "Customer with the phone already exists.");
+			isValid = false;
+		}
+		
 		return isValid;
 	}
 }

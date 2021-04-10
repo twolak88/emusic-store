@@ -19,7 +19,7 @@ public interface CartService {
 
 	void createCustomerCart(Customer savedCustomer);
 	
-	void createNextCustomerCart(Cart cart);
+	void processOrder(Cart cart);
 	
 	Cart validate(Long cartId);
 }

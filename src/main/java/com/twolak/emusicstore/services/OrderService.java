@@ -7,4 +7,6 @@ public interface OrderService {
 	void addOrder(Cart cart);
 
 	double getCustomerOrderGrandTotal(Cart cart);
+	
+	void cancelOrder(Cart cart);
 }

@@ -80,7 +80,7 @@ public class CartServiceImpl implements CartService {
 	
 	@Transactional
 	@Override
-	public void createNextCustomerCart(Cart cart) {
+	public void processOrder(Cart cart) {
 		cart.setActive(false);
 		this.cartRepository.save(cart);
 		

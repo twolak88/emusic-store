@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org"
+ 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ 	layout:decorator="template/page">
+ 	<div layout:fragment="content">
+		<div class="container-wrapper" style="padding-top: 5rem;">
+			<div class="container">
+				<div class="page-header">
+					<h1>Customer</h1>
+					<p class="lead">Customer Details</p>
+				</div>
+				<form th:object="${order}" method="post" th:action="${flowExecutionUrl}" class="form-horizontal">
+					<h3>Basic info</h3>
+					<div class="form-group mb-3">
+						<label for="name" class="form-label fw-bold">Name</label>
+						<span th:each="error : ${#fields.errors('cart.customer.name')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.name')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.name}" id="name" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="email" class="form-label fw-bold">Email</label>
+						<span th:each="error : ${#fields.errors('cart.customer.email')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.email')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.email}" id="email" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="phone" class="form-label fw-bold">Phone</label>
+						<span th:each="error : ${#fields.errors('cart.customer.phone')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.phone')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.phone}" id="phone" class="form-control" />
+					</div>
+					<input type="hidden" th:field="*{cart.customer.username}" />
+					<input type="hidden" th:field="*{cart.customer.password}" />
+					<input type="hidden" th:field="*{cart.customer.enabled}" />
+					<h3>Billing Address</h3>
+					<div class="form-group mb-3">
+						<label for="billingStreet" class="form-label fw-bold">Street</label>
+						<span th:each="error : ${#fields.errors('cart.customer.billingAddress.streetName')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.billingAddress.streetName')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.billingAddress.streetName}" id="billingStreet" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="billingApartmentNumber" class="form-label fw-bold">Apartment Number</label>
+						<span th:each="error : ${#fields.errors('cart.customer.billingAddress.apartmentNumber')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.billingAddress.apartmentNumber')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.billingAddress.apartmentNumber}" id="billingApartmentNumber" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="billingCity" class="form-label fw-bold">City</label>
+						<span th:each="error : ${#fields.errors('cart.customer.billingAddress.city')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.billingAddress.city')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.billingAddress.city}" id="billingCity" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="billingState" class="form-label fw-bold">State</label>
+						<span th:each="error : ${#fields.errors('cart.customer.billingAddress.state')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.billingAddress.state')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.billingAddress.state}" id="billingState" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="billingCountry" class="form-label fw-bold">Country</label>
+						<span th:each="error : ${#fields.errors('cart.customer.billingAddress.country')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.billingAddress.country')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.billingAddress.country}" id="billingCountry" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="billingZipCode" class="form-label fw-bold">Zip Code</label>
+						<span th:each="error : ${#fields.errors('cart.customer.billingAddress.zipCode')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.billingAddress.zipCode')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.billingAddress.zipCode}" id="billingZipCode" class="form-control" />
+					</div>
+
+			        <input type="hidden" name="_flowExecutionKey" th:value="${flowExecutionKey}" />
+
+					<input type="submit" value="Next" class="btn btn-success" name="_eventId_customerInfoCollected"/>
+					<button class="btn btn-danger" name="_eventId_cancel">Cancel</button>
+				</form>
+			</div>
+		</div>
+ 	</div>
+</html>

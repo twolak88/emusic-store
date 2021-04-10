@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org"
+ 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ 	layout:decorator="template/page">
+ 	<div layout:fragment="content">
+ 		<div class="container">
+			<div class="page-header">
+				<h1>Edit Product</h1>
+				<p class="lead">Fill below information to update Product: ${product.name}</p>
+			</div>
+			<form method="post" 
+					th:action="@{'/admin/products/add?'+${_csrf.parameterName}+'='+${_csrf.token}}" 
+					th:object="${product}"
+					enctype="multipart/form-data">
+					
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{imageUrl}" />
+					
+				<div class="form-group mb-3">
+					<label for="name" class="form-label fw-bold">Name</label>
+					<span th:each="error : ${#fields.errors('name')}" th:text="${error}" th:classappend="${#fields.hasErrors('name')} ? 'error'"></span>
+					<input type="text" th:field="*{name}" id="name" class="form-control" />
+				</div>
+				
+				<div class="form-group mb-3">
+					<label for="category" class="form-label fw-bold col-sm-3">Category</label>
+					<label class="checkbox-inline col-sm-2">
+						<input type="radio" th:field="*{category}" id="category" value="instrument" />
+						Instrument
+					</label>
+					<label class="checkbox-inline col-sm-2">
+						<input type="radio" th:field="*{category}" id="category" value="record" />
+						Record
+					</label>
+					<label class="checkbox-inline col-sm-2">
+						<input type="radio" th:field="*{category}" id="category" value="accessory" />
+						Accessory
+					</label>
+				</div>
+				
+				<div class="form-group mb-3">
+					<label for="description" class="form-label fw-bold">Description</label>
+					<textarea rows="3" th:field="*{description}" id="description" class="form-control" />
+				</div>
+				
+				<div class="form-group mb-3">
+					<label for="price" class="form-label fw-bold">Price</label>
+					<span th:each="error : ${#fields.errors('price')}" th:text="${error}" th:classappend="${#fields.hasErrors('price')} ? 'error'"></span>
+					<input type="number" th:field="*{price}" id="price" class="form-control" />
+				</div>
+				
+				<div class="form-group mb-3">
+					<label for="condition" class="form-label fw-bold col-sm-3">Condition</label>
+					<label class="checkbox-inline col-sm-2">
+						<input type="radio" th:field="*{condition}" id="condition" value="new" />
+						New
+					</label>
+					<label class="checkbox-inline col-sm-2">
+						<input type="radio" th:field="*{condition}" id="condition" value="used" />
+						Used
+					</label>
+				</div>
+				
+				<div class="form-group mb-3">
+					<label for="status" class="form-label fw-bold col-sm-3">Status</label>
+					<label class="checkbox-inline col-sm-2">
+						<input type="radio" th:field="*{status}" id="status" value="active" />
+						Active
+					</label>
+					<label class="checkbox-inline col-sm-2">
+						<input type="radio" th:field="*{status}" id="status" value="inactive" />
+						Inactive
+					</label>
+				</div>
+				
+				<div class="form-group mb-3">
+					<label for="unitInStock" class="form-label fw-bold">Unit In Stock</label>
+					<span th:each="error : ${#fields.errors('unitInStock')}" th:text="${error}" th:classappend="${#fields.hasErrors('unitInStock')} ? 'error'"></span>
+					<input type="number" th:field="*{unitInStock}" id="unitInStock" class="form-control" />
+				</div>
+				
+				<div class="form-group mb-3">
+					<label for="manufacturer" class="form-label fw-bold">Manufacturer</label>
+					<span th:each="error : ${#fields.errors('manufacturer')}" th:text="${error}" th:classappend="${#fields.hasErrors('manufacturer')} ? 'error'"></span>
+					<input type="text" th:field="*{manufacturer}" id="manufacturer" class="form-control" />
+				</div>
+				
+				<div class="form-group mb-5">
+					<label for="image" class="control-label fw-bold">Upload Image</label>
+					<input th:field="*{image}" id="image" type="file" class="form-control" />
+				</div>
+				
+				<input type="submit" value="Submit" class="btn btn-success" />
+				<a href="@{/admin/products}" class="btn btn-danger">Cancel</a>
+			</form>
+		</div>
+ 	</div>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org"
+	 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author"
+			content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+		<meta name="generator" content="Hugo 0.80.0">
+		    
+		<!-- CSRF -->
+		<meta name="_csrf" th:content="${_csrf.token}"/>
+		<!-- default header name is X-CSRF-TOKEN -->
+		<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+		
+		<title>eMusic Store</title>
+		
+		<!-- Bootstrap core CSS -->
+		<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+		
+		<script th:src="@{/resources/js/bootstrap.min.js}"></script>
+		
+		<link th:href="@{/resources/css/main.css}" rel="stylesheet">
+		
+		<!-- Custom styles for this template -->
+		<link th:href="@{/resources/css/carousel.css}" rel="stylesheet">
+		
+		<!-- Angular JS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+		
+		<!-- JQuery -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- JQuery Data Tables -->
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+		<link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
+		
+		<style>
+		body {
+		  padding-top: 3.5rem;
+		  padding-bottom: 3rem;
+		  color: #5a5a5a;
+		}
+		
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+		
+		@media ( min-width : 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+		</style>
+	</head>
+	<body>
+    	<div th:replace="template/header :: header">HEADER</div>
+        <div layout:fragment="content">
+			content
+		</div>
+        <div th:replace="template/footer :: footer">FOOTER</div>
+	</body>
+</html>

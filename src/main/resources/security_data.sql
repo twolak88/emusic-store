@@ -11,5 +11,5 @@ create table authorities (
 );
 create unique index ix_auth_username on authorities (username,authority);
 
-insert into users(id, username, password, enabled) values(1, 'admin', '$2y$12$8mqNgb7bnY.wt/oUJGxw0.M0a.NAr/tiJgQ1tcm6pzacVp1XcbLD.', 1);
-insert into authorities(id, username, authority) values(1, 'admin', 'ROLE_ADMIN');
+insert into users(username, password, enabled) values('admin', '$2y$12$8mqNgb7bnY.wt/oUJGxw0.M0a.NAr/tiJgQ1tcm6pzacVp1XcbLD.', 1);
+insert into authorities(username, authority) values('admin', 'ROLE_ADMIN');

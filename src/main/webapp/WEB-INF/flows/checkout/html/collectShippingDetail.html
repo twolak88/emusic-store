@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org"
+ 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ 	layout:decorator="template/page">
+ 	<div layout:fragment="content">
+	 	<div class="container-wrapper" style="padding-top: 5rem;">
+			<div class="container">
+				<div class="page-header">
+					<h1>Customer</h1>
+					<p class="lead">Shipping Details</p>
+				</div>
+				<form th:object="${order}" method="post" th:action="${flowExecutionUrl}" class="form-horizontal">
+					<h3>Shipping Address</h3>
+					<div class="form-group mb-3">
+						<label for="shippingStreet" class="form-label fw-bold">Street</label>
+						<span th:each="error : ${#fields.errors('cart.customer.shippingAddress.streetName')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.shippingAddress.streetName')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.shippingAddress.streetName}" id="shippingStreet" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="shippingApartmentNumber" class="form-label fw-bold">Apartment Number</label>
+						<span th:each="error : ${#fields.errors('cart.customer.shippingAddress.apartmentNumber')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.shippingAddress.apartmentNumber')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.shippingAddress.apartmentNumber}" id="shippingApartmentNumber" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="shippingCity" class="form-label fw-bold">City</label>
+						<span th:each="error : ${#fields.errors('cart.customer.shippingAddress.city')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.shippingAddress.city')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.shippingAddress.city}" id="shippingCity" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="shippingState" class="form-label fw-bold">State</label>
+						<span th:each="error : ${#fields.errors('cart.customer.shippingAddress.state')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.shippingAddress.state')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.shippingAddress.state}" id="shippingState" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="shippingCountry" class="form-label fw-bold">Country</label>
+						<span th:each="error : ${#fields.errors('cart.customer.shippingAddress.country')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.shippingAddress.country')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.shippingAddress.country}" id="shippingCountry" class="form-control" />
+					</div>
+					<div class="form-group mb-3">
+						<label for="shippingZipCode" class="form-label fw-bold">Zip Code</label>
+						<span th:each="error : ${#fields.errors('cart.customer.shippingAddress.zipCode')}" th:text="${error}" th:classappend="${#fields.hasErrors('cart.customer.shippingAddress.zipCode')} ? 'error'"></span>
+						<input type="text" th:field="*{cart.customer.shippingAddress.zipCode}" id="shippingZipCode" class="form-control" />
+					</div>
+					
+					<input type="hidden" name="_flowExecutionKey" th:value="${flowExecutionKey}" />
+					
+					<button class="btn btn-default" name="_eventId_backToCollectCustomrInfo">Back</button>
+					<input type="submit" value="Next" class="btn btn-success" name="_eventId_shippingDetailCollected"/>
+					<button class="btn btn-danger" name="_eventId_cancel">Cancel</button>
+				</form>
+			</div>
+		</div>
+ 	</div>
+</html>
