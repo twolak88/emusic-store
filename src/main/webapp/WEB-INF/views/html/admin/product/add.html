@@ -11,8 +11,8 @@
 					<p class="lead">Fill below information to add new Product</p>
 				</div>
 				<form method="post" 
-						th:action="@{pageContext.request.contextPath}/admin/products/add?${_csrf.parameterName}=${_csrf.token}" 
-						th:object="product"
+						th:action="@{'/admin/products/add?'+${_csrf.parameterName}+'='+${_csrf.token}}" 
+						th:object="${product}"
 						enctype="multipart/form-data">
 						
 					<div class="form-group mb-3">
@@ -90,7 +90,7 @@
 					</div>
 					
 					<input type="submit" value="Submit" class="btn btn-success" />
-					<a href="@{/admin/products}" class="btn btn-danger">Cancel</a>
+					<a th:href="@{/admin/products}" class="btn btn-danger">Cancel</a>
 				</form>
 			</div>
 		</div>
