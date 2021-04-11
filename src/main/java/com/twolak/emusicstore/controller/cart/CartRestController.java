@@ -2,7 +2,6 @@ package com.twolak.emusicstore.controller.cart;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.twolak.emusicstore.model.Cart;
 import com.twolak.emusicstore.services.CartService;
 import com.twolak.emusicstore.services.CustomerService;
+import com.twolak.emusicstore.services.security.UserDetailsImpl;
 
 @RestController
 @RequestMapping("/rest/cart")
@@ -49,21 +49,21 @@ public class CartRestController {
 	}
 	
 	@PutMapping("/add/{productId}")
-	public @ResponseBody Cart addItem(@PathVariable("productId") Long productId, @AuthenticationPrincipal User activeUser) {
+	public @ResponseBody Cart addItem(@PathVariable("productId") Long productId, @AuthenticationPrincipal UserDetailsImpl activeUser) {
 		Cart activeCart = this.customerService.getActiveCartForCustomer(activeUser.getUsername());
 		return this.cartService.addItem(activeCart, productId);
 	}
 	
 	@PutMapping("/remove/{productId}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void removeItem(@PathVariable("productId") Long productId, @AuthenticationPrincipal User activeUser) {
+	public void removeItem(@PathVariable("productId") Long productId, @AuthenticationPrincipal UserDetailsImpl activeUser) {
 		Cart activeCart = this.customerService.getActiveCartForCustomer(activeUser.getUsername());
 		this.cartService.removeItem(activeCart, productId);
 	}
 	
 	@PutMapping("/items/remove")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void removeItems(@AuthenticationPrincipal User activeUser) {
+	public void removeItems(@AuthenticationPrincipal UserDetailsImpl activeUser) {
 		Cart activeCart = this.customerService.getActiveCartForCustomer(activeUser.getUsername());
 		this.cartService.removeItems(activeCart);
 	}

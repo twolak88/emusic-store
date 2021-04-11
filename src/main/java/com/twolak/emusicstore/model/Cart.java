@@ -1,6 +1,7 @@
 package com.twolak.emusicstore.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -16,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -59,6 +63,12 @@ public class Cart implements Serializable {
 	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Order order;
+	
+	@CreationTimestamp
+	private Date dateCreated;
+	
+	@UpdateTimestamp
+	private Date lastUpdated;
 	
 	public void addCartItem(CartItem cartItem) {
 		Optional<CartItem> foundItem = this.cartItems.stream()

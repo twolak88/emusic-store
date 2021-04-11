@@ -1,7 +1,6 @@
 package com.twolak.emusicstore.controller.cart;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.twolak.emusicstore.model.Cart;
 import com.twolak.emusicstore.services.CustomerService;
+import com.twolak.emusicstore.services.security.UserDetailsImpl;
 
 @Controller
 @RequestMapping("/customer/cart")
@@ -22,7 +22,7 @@ public class CartController {
 	}
 
 	@GetMapping
-	public String getCartForActiveCustomer(@AuthenticationPrincipal User activeUser) {
+	public String getCartForActiveCustomer(@AuthenticationPrincipal UserDetailsImpl activeUser) {
 		Cart activeCart = this.customerService.getActiveCartForCustomer(activeUser.getUsername());
 		return "redirect:/customer/cart/" + activeCart.getId();
 	}

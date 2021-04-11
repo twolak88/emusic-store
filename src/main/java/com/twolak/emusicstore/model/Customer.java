@@ -1,6 +1,7 @@
 package com.twolak.emusicstore.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +19,9 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -63,6 +67,12 @@ public class Customer implements Serializable {
 	private String password;
 	
 	private boolean enabled;
+	
+	@CreationTimestamp
+	private Date dateCreated;
+	
+	@UpdateTimestamp
+	private Date lastUpdated;
 	
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)

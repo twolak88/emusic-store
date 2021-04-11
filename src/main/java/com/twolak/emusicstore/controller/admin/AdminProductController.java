@@ -3,6 +3,7 @@ package com.twolak.emusicstore.controller.admin;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.twolak.emusicstore.model.Product;
 import com.twolak.emusicstore.services.ProductService;
+import com.twolak.emusicstore.services.security.UserDetailsImpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,13 +34,14 @@ public class AdminProductController {
 	}
 	
 	@PostMapping("/products/add")
-	public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, HttpServletRequest request) {
+	public String saveProduct(@Valid @ModelAttribute("product") Product product, @AuthenticationPrincipal UserDetailsImpl activeUserDetails, BindingResult bindingResult, HttpServletRequest request) {
 		
 		if (bindingResult.hasErrors()) {
 			return "admin/product/add";
 		}
 		
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+		product.setUser(activeUserDetails.getAuthenticatedUser());
 		this.productService.addProduct(product, rootDirectory);
 		
 		return "redirect:/admin/products";
