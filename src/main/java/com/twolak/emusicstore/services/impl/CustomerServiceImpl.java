@@ -70,6 +70,18 @@ public class CustomerServiceImpl implements CustomerService{
 		this.cartService.createCustomerCart(savedCustomer);
 		this.customerRepository.save(savedCustomer);		
 	}
+	
+
+	@Transactional
+	@Override
+	public void updateCustomer(Customer customer) {
+		User user = this.userRepository.findByUsername(customer.getUsername());
+		if (user.isEnabled() != customer.isEnabled()) {
+			user.setEnabled(customer.isEnabled());
+			this.userRepository.save(user);	
+		}
+		this.customerRepository.save(customer);
+	}
 
 	@Override
 	public Customer getCustomerById(Long id) {
@@ -138,6 +150,12 @@ public class CustomerServiceImpl implements CustomerService{
 		changeCustomerStatus(customerId, false);
 	}
 	
+	@Transactional
+	@Override
+	public void deleteCustomer(Long customerId) {
+		this.customerRepository.deleteById(customerId);
+	}
+
 	private void changeCustomerStatus(Long customerId, boolean isEnabled) {
 		Customer customer = this.customerRepository.findById(customerId)
 				.orElseThrow(() -> new RuntimeException("Customer doesn't exist for id: " + customerId));

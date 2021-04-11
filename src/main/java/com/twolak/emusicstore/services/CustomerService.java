@@ -10,6 +10,8 @@ public interface CustomerService {
 
 	void addCustomer(Customer customer);
 	
+	void updateCustomer(Customer customer);
+	
 	Customer getCustomerById(Long id);
 	
 	Iterable<Customer> getAllCustomers();
@@ -23,4 +25,6 @@ public interface CustomerService {
 	void enableCustomer(Long customerId);
 
 	void disableCustomer(Long customerId);
+
+	void deleteCustomer(Long customerId);
 }

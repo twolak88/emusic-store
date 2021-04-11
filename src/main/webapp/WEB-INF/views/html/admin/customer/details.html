@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org"
+ 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ 		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+ 	layout:decorator="template/page">
+ 	<div layout:fragment="content">
+ 		<div class="container-wrapper" style="padding-top: 5rem;">
+			<div class="container">
+				<div class="page-header">
+					<h1>Customer Detail</h1>
+					<p class="lead">Detail information of the customer</p>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-5">
+							<h3>Customer: <strong th:text="${ customer.name }">name</strong></h3>
+							<p>
+								<strong>Login: </strong><span th:text="${ customer.username }">username</span>
+							</p>
+							<p>
+								<strong>Email: </strong><span th:text="${ customer.email }">category</span>
+							</p>
+							<p>
+								<strong>Status: </strong><span th:text="${ customer.enabled }">condition</span>
+							</p>
+							<p>
+								<strong>Phone: </strong><span th:text="${ customer.phone }">unitInStock</span>
+							</p>
+							<p>
+								<strong>Registered: </strong><span th:text="${ #dates.format(customer.dateCreated) }">status</span>
+							</p>
+							<p>
+								<strong>Last updated: </strong><span th:text="${ #dates.format(customer.lastUpdated) }">status</span>
+							</p>
+							<h3>Billing Address</h3>
+							<p>
+								<span th:text="${customer.billingAddress.streetName}+', '+${customer.billingAddress.apartmentNumber}">street, apartment number</span>
+							</p>
+								<span th:text="${customer.billingAddress.city}+', '+${customer.billingAddress.state}">city, state</span>
+							<p>
+								<span th:text="${customer.billingAddress.country}+', '+${customer.billingAddress.zipCode}">country, zip code</span>
+							</p>
+							<h3>Shipping Address</h3>
+							<p>
+								<span th:text="${customer.shippingAddress.streetName}+', '+${customer.shippingAddress.apartmentNumber}">street, apartment number</span>
+							</p>
+								<span th:text="${customer.shippingAddress.city}+', '+${customer.shippingAddress.state}">city, state</span>
+							<p>
+								<span th:text="${customer.shippingAddress.country}+', '+${customer.shippingAddress.zipCode}">country, zip code</span>
+							</p>
+							 
+							 
+							 <a th:href="@{/admin/customers}" class="btn btn-default">Back</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:src="@{/resources/js/controller.js}" ></script>
+ 	</div>
+</html>

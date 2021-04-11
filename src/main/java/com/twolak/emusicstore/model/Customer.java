@@ -69,6 +69,7 @@ public class Customer implements Serializable {
 	private boolean enabled;
 	
 	@CreationTimestamp
+	@Column(updatable = false)
 	private Date dateCreated;
 	
 	@UpdateTimestamp

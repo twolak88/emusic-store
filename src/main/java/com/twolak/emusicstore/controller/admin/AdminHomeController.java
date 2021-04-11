@@ -38,6 +38,6 @@ public class AdminHomeController {
 	public String customerManagement(Model model) {
 		Iterable<Customer> customers = this.customerService.getAllCustomers();
 		model.addAttribute("customers", customers);
-		return "admin/customerManagement";
+		return "admin/customer/customerManagement";
 	}
 }
