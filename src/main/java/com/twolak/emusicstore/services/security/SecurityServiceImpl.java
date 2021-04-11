@@ -1,6 +1,5 @@
 package com.twolak.emusicstore.services.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,15 +12,13 @@ import com.twolak.emusicstore.repositories.UserRepository;
 @Service
 public class SecurityServiceImpl implements UserDetailsService {
 	
-	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
+	private final AuthoritiesRepository authoritiesRepository;
 	
-	@Autowired
-	private AuthoritiesRepository authoritiesRepository;
-	
-//	public SecurityServiceImpl(UserRepository userRepository) {
-//		this.userRepository = userRepository;
-//	}
+	public SecurityServiceImpl(UserRepository userRepository, AuthoritiesRepository authoritiesRepository) {
+		this.userRepository = userRepository;
+		this.authoritiesRepository = authoritiesRepository;
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

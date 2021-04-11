@@ -34,7 +34,13 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 	
-	<bean id="userDetailsService" class="com.twolak.emusicstore.services.security.SecurityServiceImpl"/>
+	<bean id="userDetailsService" class="com.twolak.emusicstore.services.security.SecurityServiceImpl">
+		<constructor-arg index="0" ref="userRepository" />
+		<constructor-arg index="1" ref="authoritiesRepository" />
+	</bean>
+	
+	<bean id="userRepository" class="com.twolak.emusicstore.repositories.UserRepository"/>
+	<bean id="authoritiesRepository" class="com.twolak.emusicstore.repositories.AuthoritiesRepository"/>
 	
 <!-- 	<security:http-firewall ref="allowSemicolonHttpFirewall"/> -->
 <!-- 	<bean id="allowSemicolonHttpFirewall"  -->
