@@ -14,6 +14,7 @@ import com.twolak.emusicstore.model.Authorities;
 import com.twolak.emusicstore.model.BillingAddress;
 import com.twolak.emusicstore.model.Cart;
 import com.twolak.emusicstore.model.Customer;
+import com.twolak.emusicstore.model.Order;
 import com.twolak.emusicstore.model.ShippingAddress;
 import com.twolak.emusicstore.model.User;
 import com.twolak.emusicstore.repositories.AuthoritiesRepository;
@@ -107,6 +108,12 @@ public class CustomerServiceImpl implements CustomerService{
 				.filter(cart -> cart.isActive())
 				.findFirst()
 				.orElseThrow(() -> new RuntimeException("There is no active cart for customer " + customer.getUsername()));
+	}
+	
+	@Override
+	public Iterable<Order> getCustomerOrders(String username) {
+		Customer customer = this.customerRepository.findByUsername(username);
+		return customer.getOrders();
 	}
 
 	@Override

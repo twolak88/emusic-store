@@ -53,4 +53,10 @@ public class OrderServiceImpl implements OrderService {
 		this.orderRepository.delete(order);
 		this.cartRepository.save(cart);
 	}
+
+	@Override
+	public Order findOrder(Long orderId) {
+		return this.orderRepository.findById(orderId)
+				.orElseThrow(() -> new RuntimeException("Order not found for id: " + orderId));
+	}
 }

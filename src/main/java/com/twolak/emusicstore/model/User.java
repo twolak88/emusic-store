@@ -1,5 +1,7 @@
 package com.twolak.emusicstore.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +21,9 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 4599753286807439461L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

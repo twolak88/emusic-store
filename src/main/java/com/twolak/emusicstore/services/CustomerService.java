@@ -4,6 +4,7 @@ import org.springframework.validation.BindingResult;
 
 import com.twolak.emusicstore.model.Cart;
 import com.twolak.emusicstore.model.Customer;
+import com.twolak.emusicstore.model.Order;
 
 public interface CustomerService {
 	Customer getNewCustomer();
@@ -27,4 +28,6 @@ public interface CustomerService {
 	void disableCustomer(Long customerId);
 
 	void deleteCustomer(Long customerId);
+
+	Iterable<Order> getCustomerOrders(String username);
 }
