@@ -42,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService{
 		BillingAddress billingAddress = new BillingAddress();
 		ShippingAddress shippingAddress = new ShippingAddress();
 		Customer customer = Customer.builder()
-				.enabled(true)
+				.enabled(false)
 				.billingAddress(billingAddress)
 				.shippingAddress(shippingAddress)
 				.build();
@@ -124,5 +124,27 @@ public class CustomerServiceImpl implements CustomerService{
 		}
 		
 		return isValid;
+	}
+
+	@Transactional
+	@Override
+	public void enableCustomer(Long customerId) {
+		changeCustomerStatus(customerId, true);
+	}
+
+	@Transactional
+	@Override
+	public void disableCustomer(Long customerId) {
+		changeCustomerStatus(customerId, false);
+	}
+	
+	private void changeCustomerStatus(Long customerId, boolean isEnabled) {
+		Customer customer = this.customerRepository.findById(customerId)
+				.orElseThrow(() -> new RuntimeException("Customer doesn't exist for id: " + customerId));
+		customer.setEnabled(isEnabled);
+		User user = this.userRepository.findByUsername(customer.getUsername());
+		user.setEnabled(isEnabled);
+		this.customerRepository.save(customer);
+		this.userRepository.save(user);
 	}
 }

@@ -19,4 +19,8 @@ public interface CustomerService {
 	Cart getActiveCartForCustomer(String username);
 
 	boolean validateCustomer(Customer customer, BindingResult bindingResult);
+
+	void enableCustomer(Long customerId);
+
+	void disableCustomer(Long customerId);
 }
