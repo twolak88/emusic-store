@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -57,6 +59,9 @@ public class Order implements Serializable {
 	@JoinColumn(name = "shipping_address_id")
 	@JsonBackReference
 	private ShippingAddress shippingAddress;
+	
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
 	
 	@CreationTimestamp
 	private Date dateCreated;

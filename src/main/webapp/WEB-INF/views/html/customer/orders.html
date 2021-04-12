@@ -23,6 +23,7 @@
 						<tr class="table-dark">
 							<th>ID</th>
 							<th>Total Price</th>
+							<th>Status</th>
 							<th>Creation Date</th>
 							<th>Last updated</th>
 							<th></th>
@@ -32,6 +33,7 @@
 						<tr th:each="order : ${orders}">
 							<td th:text="${ order.id }">id</td>
 							<td th:text="${ order.cart.grandTotal } + ' PLN'">grand total</td>
+							<td th:text="${ order.status.label }">status</td>
 							<td th:text="${#dates.format(order.dateCreated)}">creation date</td>
 							<td th:text="${#dates.format(order.lastUpdated)}">last updated</td>
 							<td>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.twolak.emusicstore.model.Cart;
 import com.twolak.emusicstore.model.CartItem;
 import com.twolak.emusicstore.model.Order;
+import com.twolak.emusicstore.model.OrderStatus;
 import com.twolak.emusicstore.repositories.CartRepository;
 import com.twolak.emusicstore.repositories.OrderRepository;
 import com.twolak.emusicstore.services.OrderService;
@@ -29,6 +30,7 @@ public class OrderServiceImpl implements OrderService {
 			.cart(cart)
 			.billingAddress(cart.getCustomer().getBillingAddress())
 			.shippingAddress(cart.getCustomer().getShippingAddress())
+			.status(OrderStatus.ORDERED)
 			.build();
 		cart.setOrder(order);
 		cart.getCustomer().addOrder(order);
