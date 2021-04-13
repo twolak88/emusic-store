@@ -12,16 +12,17 @@
         <jsr107:defaults enable-management="true" enable-statistics="true"/>
     </service>
     <!-- Persistent cache directory -->
-    <persistence directory="ehcache/cache" />
+    <persistence directory="${cache.dir}" />
     
     <cache alias="CUSTOMER_CACHE" uses-template="config-cache"/>
     <cache alias="CART_CACHE" uses-template="config-cache"/>
     <cache alias="PRODUCT_CACHE" uses-template="config-cache"/>
+    <cache alias="PRODUCTS_CACHE" uses-template="config-cache"/>
     
     <!-- Custom cache template -->
     <cache-template name="config-cache">
         <expiry>
-            <ttl unit="minutes">1</ttl>
+            <ttl unit="minutes">10</ttl>
         </expiry>
         <listeners>
             <listener>
@@ -45,7 +46,7 @@
     <!-- Default cache template -->
     <cache-template name="default">
     	<expiry>
-            <ttl unit="seconds">30</ttl>
+            <ttl unit="minutes">30</ttl>
         </expiry>
 		<listeners>
             <listener>

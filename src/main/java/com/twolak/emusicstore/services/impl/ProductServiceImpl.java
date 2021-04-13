@@ -27,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
 		this.imageService = imageService;
 	}
 	
+	@CacheEvict(cacheNames = "PRODUCTS_CACHE")
 	@CachePut(cacheNames = "PRODUCT_CACHE", key = "#result.id")
 	@Transactional
 	@Override
@@ -38,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
 		return savedProduct;
 	}
 	
+	@CacheEvict(cacheNames = "PRODUCTS_CACHE")
 	@CachePut(cacheNames = "PRODUCT_CACHE", key = "#result.id")
 	@Transactional
 	@Override
@@ -59,12 +61,13 @@ public class ProductServiceImpl implements ProductService {
 				.orElseThrow(() -> new RuntimeException(String.format("Product id: %d not found", id)));
 	}
 
+	@Cacheable(cacheNames = "PRODUCTS_CACHE")
 	@Override
 	public Iterable<Product> getAllProducts() {
 		return this.productRepository.findAll();
 	}
 	
-	@CacheEvict(cacheNames = "PRODUCT_CACHE")
+	@CacheEvict(cacheNames = {"PRODUCT_CACHE", "PRODUCTS_CACHE"})
 	@Transactional
 	@Override
 	public void deleteProduct(@CacheKey Long id, String rootPath) {
