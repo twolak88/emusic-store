@@ -60,7 +60,7 @@ public class Product implements Serializable {
 	@Column(name = "price")
 	private double price;
 	
-	@Column(name = "condition")
+	@Column(name = "prod_condition")
 	private String condition;
 	
 	@Column(name = "status")
