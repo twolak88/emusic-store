@@ -9,9 +9,9 @@ import com.twolak.emusicstore.model.Order;
 public interface CustomerService {
 	Customer getNewCustomer();
 
-	void addCustomer(Customer customer);
+	Customer addCustomer(Customer customer);
 	
-	void updateCustomer(Customer customer);
+	Customer updateCustomer(Customer customer);
 	
 	Customer getCustomerById(Long id);
 	
@@ -23,9 +23,9 @@ public interface CustomerService {
 
 	boolean validateCustomer(Customer customer, BindingResult bindingResult);
 
-	void enableCustomer(Long customerId);
+	Customer enableCustomer(Long customerId);
 
-	void disableCustomer(Long customerId);
+	Customer disableCustomer(Long customerId);
 
 	void deleteCustomer(Long customerId);
 

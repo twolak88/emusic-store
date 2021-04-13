@@ -7,17 +7,17 @@ public interface CartService {
 
 	Cart getCartById(Long cartId);
 
-	void update(Long cartId, Cart cart);
+	Cart update(Long cartId, Cart cart);
 
 	void delete(Long cartId);
 
 	Cart addItem(Cart cart, Long productId);
 
-	void removeItem(Cart cart, Long productId);
+	Cart removeItem(Cart cart, Long productId);
 
-	void removeItems(Cart cart);
+	Cart removeItems(Cart cart);
 
-	void createCustomerCart(Customer savedCustomer);
+	Cart createCustomerCart(Customer savedCustomer);
 	
 	void processOrder(Cart cart);
 	

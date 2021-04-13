@@ -13,6 +13,7 @@
 			/WEB-INF/applicationContext.xml
 			/WEB-INF/applicationContext-security.xml
 			/WEB-INF/applicationContext-dataAccess.xml
+			/WEB-INF/applicationContext-ehcache.xml
 			/WEB-INF/applicationContext-thymeleaf.xml
 			/WEB-INF/applicationContext-webflow.xml
 		</param-value>

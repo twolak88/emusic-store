@@ -1,7 +1,12 @@
 package com.twolak.emusicstore.services.impl;
 
+import javax.cache.annotation.CacheKey;
 import javax.transaction.Transactional;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,6 +15,7 @@ import com.twolak.emusicstore.repositories.ProductRepository;
 import com.twolak.emusicstore.services.ImageService;
 import com.twolak.emusicstore.services.ProductService;
 
+@EnableCaching
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -21,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
 		this.imageService = imageService;
 	}
 	
+	@CachePut(cacheNames = "PRODUCT_CACHE", key = "#result.id")
 	@Transactional
 	@Override
 	public Product addProduct(Product product, String rootPath) {
@@ -31,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
 		return savedProduct;
 	}
 	
+	@CachePut(cacheNames = "PRODUCT_CACHE", key = "#result.id")
 	@Transactional
 	@Override
 	public Product updateProduct(Product product, String rootPath) {
@@ -44,8 +52,9 @@ public class ProductServiceImpl implements ProductService {
 		return savedProduct;
 	}
 
+	@Cacheable(cacheNames = "PRODUCT_CACHE")
 	@Override
-	public Product getProductById(Long id) {
+	public Product getProductById(@CacheKey Long id) {
 		return this.productRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException(String.format("Product id: %d not found", id)));
 	}
@@ -55,9 +64,10 @@ public class ProductServiceImpl implements ProductService {
 		return this.productRepository.findAll();
 	}
 	
+	@CacheEvict(cacheNames = "PRODUCT_CACHE")
 	@Transactional
 	@Override
-	public void deleteProduct(Long id, String rootPath) {
+	public void deleteProduct(@CacheKey Long id, String rootPath) {
 		Product product = this.getProductById(id);
 		this.imageService.deleteProductImage(rootPath, product.getImageUrl());
 		
